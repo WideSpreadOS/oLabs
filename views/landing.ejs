@@ -15,6 +15,7 @@
 
 
 <h3>RESOURCES: </h3>
+
 <div class="resource-container">
     <% allResources.forEach(function(resource) { %>
         <div class="resource">
@@ -48,21 +49,67 @@
     <% }) %>
 </div>
 
+
+
 <h3>NOTES: </h3>
-<% allNotes.forEach(function(note) { %>
-    <p><%= note %></p>
-<% }) %>
+
+<div class="note-container">
+    <% allNotes.forEach(function(note) { %>
+        <div class="note">
+            <div class="note-header">
+                <div class="note-title">
+                    <h5><%= note.title %></h5>
+                </div>
+                <div class="note-categories">
+                    <div class="main-category">
+                        <span><%= note.category %></span>
+                    </div>
+                    <div class="note-sub-categories">
+                        <% note.sub_category.forEach(function(cat) { %>
+                            <span><%= cat %></span>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+            <div class="note-body">
+                <p><%= note.body %></p>
+            </div>
+            <div class="note-added">
+                <span><%= note.added.toLocaleDateString("en-US") %> - <%= note.added.toLocaleTimeString() %></span>
+            </div>
+        </div>
+    <% }) %>
+</div>
+
+
+
 
 
 <h3>ITEMS: </h3>
-<% allItems.forEach(function(item) { %>
-    <p><%= item %></p>
-    <p style="color: #000"><%= parseFloat(item.data.price) %></p>
-    <% item.data.photos.forEach(function(photo) { %>
-        <img src="<%= photo %>" alt="">
-    <% }) %>
-<% }) %>
 
+<div class="item-container">
+    <% allItems.forEach(function(item) { %>
+        <div class="item">
+            <div class="item-header">
+                <div class="item-name">
+                    <h5><%= item.data.name %></h5>
+                </div>
+            </div>
+            <div class="item-price">
+                <p><%= parseFloat(item.data.price) %></p>
+            </div>
+            <% item.data.photos.forEach(function(photo) { %>
+                <img src="<%= photo %>" alt="">
+            <% }) %>
+        </div>
+    <% }) %>
+</div>
+
+
+
+<hr style="margin-top: 200px;">
+
+<h1>DATA</h1>
 <ol>
     <li>olabs.tech - $9.99</li>
     <li>olabs.world - $1.99</li>
@@ -161,8 +208,8 @@
 
 <form action="/note/add" method="post">
     <h3>Add a Note</h3>
-    <input type="text" name="name" id="addNoteTitle" placeholder="Title">
-    <textarea name="body.content" id="addNoteContent" placeholder="Write a note..."></textarea>
+    <input type="text" name="title" id="addNoteTitle" placeholder="Title">
+    <textarea name="body" id="addNoteContent" placeholder="Write a note..."></textarea>
     <select name="category" id="addNoteCategory">
         <option selected disabled hidden>Category</option>
         <option value="software">Software</option>

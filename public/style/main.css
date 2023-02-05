@@ -6,7 +6,6 @@
 
 body {
     background-color: #ececec;
-    color: lightskyblue;
 }
 
 
@@ -22,7 +21,7 @@ body {
 }
 
 .resource {
-    background-color: #aaa;
+    background-color: pink;
     border-radius: 1rem;
     width: 300px;
     min-height: 200px;
@@ -40,7 +39,7 @@ body {
 }
 
 .main-category {
-    color: #fff;
+    color: #888;
     padding: 3px;
 }
 
@@ -55,4 +54,84 @@ body {
 .resource-sub-categories {
     color: #222;
     padding: 3px;
+}
+
+
+.note-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+
+.note {
+    background-color: yellow;
+    border-radius: 1rem;
+    min-height: 200px;
+    width: 300px;
+    position: relative;
+    max-width: 90vw;
+    margin-inline: auto;
+}
+
+.note-header {
+    text-align: center;
+    color: #555;
+}
+
+.note-title {
+    font-size: 1.5rem;
+    color: #222;
+}
+
+.note-body {
+    padding: 10px;
+}
+
+.note-added {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    text-align: right;
+    font-size: 0.8rem;
+    border-top: solid 1px #222;
+    padding: 3px;
+}
+
+
+.item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.item {
+    border-radius: 1rem;
+    background-color: orange;
+    color: #222;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+.item-name {
+    font-size: 1.5rem;
+    padding: 5px;
+}
+.item-price {
+    padding: 4px;
+    color: orangered;
+    font-weight: bold;
+    text-shadow: 0 0 1px #000;
+}
+.item img {
+    max-width: 90%;
+    border-radius: 1rem;
 }
