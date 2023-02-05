@@ -11,3 +11,145 @@
     <a href="/">Landing</a>
     <a href="/company/inventory">Inventory</a>
 </div>
+
+
+
+<h3>RESOURCES: </h3>
+<% allResources.forEach(function(resource) { %>
+    <p><%= resource %></p>
+<% }) %>
+
+<h3>NOTES: </h3>
+<% allNotes.forEach(function(note) { %>
+    <p><%= note %></p>
+<% }) %>
+
+
+<h3>ITEMS: </h3>
+<% allItems.forEach(function(item) { %>
+    <p><%= item %></p>
+    <p style="color: #000"><%= parseFloat(item.data.price) %></p>
+    <% item.data.photos.forEach(function(photo) { %>
+        <img src="<%= photo %>" alt="">
+    <% }) %>
+<% }) %>
+
+
+<form action="/item/add" method="post">
+    <h3>Add an Item</h3>
+    <input type="text" name="data.name" id="addItemName" placeholder="Name">
+    <textarea name="data.description" id="addItemDescription" placeholder="Description..."></textarea>
+    <select name="data.category" id="addItemCategory">
+        <option selected disabled hidden>Category</option>
+        <option value="software">Software</option>
+        <option value="hardware">Hardware</option>
+        <option value="design">Design</option>
+        <option value="other">Other</option>
+    </select>
+
+    <div class="sub-categories">
+        <div class="sub-category-item">
+            <label for="databaseChkItem">Database</label>
+            <input type="checkbox" name="data.sub_category" id="databaseChkItem" value="database">
+        </div>
+        <div class="sub-category-item">
+            <label for="apiChkItem">API</label>
+            <input type="checkbox" name="data.sub_category" id="apiChkItem" value="api">
+        </div>
+        <div class="sub-category-item">
+            <label for="LibraryChkItem">Library</label>
+            <input type="checkbox" name="data.sub_category" id="LibraryChkItem" value="library">
+        </div>
+
+
+    </div>
+
+    <input type="url" name="data.photos" placeholder="Photo URL">
+    <input type="url" name="data.photos" placeholder="Photo URL">
+    <input type="url" name="data.photos" placeholder="Photo URL">
+    <input type="url" name="data.photos" placeholder="Photo URL">
+    <input type="url" name="data.photos" placeholder="Photo URL">
+    
+    <!-- DIMENSIONS -->
+    <input type="number" name="data.dimensions.w" id="addItemWidth" step="any" placeholder="Width">
+    <input type="number" name="data.dimensions.h" id="addItemHeight" step="any" placeholder="Height">
+    <input type="number" name="data.dimensions.d" id="addItemDepth" step="any" placeholder="Depth">
+    <select name="data.weight.measurment" id="addItemWeightMeasurement">
+        <option selected hidden disabled>Lb/Kg</option>
+        <option value="lb">lb - Pounds (US)</option>
+        <option value="kg">kg - Kilograms (Metric)</option>
+    </select>
+
+
+    <input type="number" name="data.weight.mass" id="addItemWeight" step="any" placeholder="Weight">
+    
+    <input type="number" name="data.price" id="addItemPriceAmt" step="any" placeholder="Price">
+
+
+    <button type="submit">Add</button>
+</form>
+
+
+<form action="/resource/add" method="post">
+    <h3>Add a Resource</h3>
+    <input type="text" name="name" id="addFormName" placeholder="Name">
+    <input type="url" name="main_url" id="addFormMainUrl" placeholder="Main URL">
+    <select name="category" id="addFormCategory">
+        <option selected disabled hidden>Category</option>
+        <option value="software">Software</option>
+        <option value="hardware">Hardware</option>
+        <option value="design">Design</option>
+        <option value="other">Other</option>
+    </select>
+    <div class="sub-categories">
+        <div class="sub-category-item">
+            <label for="databaseChk">Database</label>
+            <input type="checkbox" name="sub_category" id="databaseChk" value="database">
+        </div>
+        <div class="sub-category-item">
+            <label for="apiChk">API</label>
+            <input type="checkbox" name="sub_category" id="apiChk" value="api">
+        </div>
+        <div class="sub-category-item">
+            <label for="LibraryChk">Library</label>
+            <input type="checkbox" name="sub_category" id="LibraryChk" value="library">
+        </div>
+
+
+    </div>
+    <button type="submit">Add</button>
+</form>
+
+
+
+
+<form action="/note/add" method="post">
+    <h3>Add a Note</h3>
+    <input type="text" name="name" id="addNoteTitle" placeholder="Title">
+    <textarea name="body.content" id="addNoteContent" placeholder="Write a note..."></textarea>
+    <select name="category" id="addNoteCategory">
+        <option selected disabled hidden>Category</option>
+        <option value="software">Software</option>
+        <option value="hardware">Hardware</option>
+        <option value="design">Design</option>
+        <option value="other">Other</option>
+    </select>
+    <div class="sub-categories">
+        <div class="sub-category-item">
+            <label for="databaseChkNote">Database</label>
+            <input type="checkbox" name="sub_category" id="databaseChkNote" value="database">
+        </div>
+        <div class="sub-category-item">
+            <label for="apiChkNote">API</label>
+            <input type="checkbox" name="sub_category" id="apiChkNote" value="api">
+        </div>
+        <div class="sub-category-item">
+            <label for="LibraryChkNote">Library</label>
+            <input type="checkbox" name="sub_category" id="LibraryChkNote" value="library">
+        </div>
+
+
+    </div>
+    <button type="submit">Add</button>
+</form>
+
