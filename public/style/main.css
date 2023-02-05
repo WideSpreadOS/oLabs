@@ -1,4 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-color: #ececec;
     color: lightskyblue;
+}
+
+
+
+
+.resource-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+
+.resource {
+    background-color: #aaa;
+    border-radius: 1rem;
+    width: 300px;
+    min-height: 200px;
+    
+}
+
+.resource-header {
+    border-bottom: solid 1px #fff;
+    padding: 5px;
+}
+.resource-name {
+    font-size: 1.3rem;
+    color: orangered;
+    text-align: center;
+}
+
+.main-category {
+    color: #fff;
+    padding: 3px;
+}
+
+.resource-body {
+    padding: 10px;
+}
+.resource-body a {
+    line-break: anywhere;
+    word-break: break-all;
+    color: orangered;
+}
+.resource-sub-categories {
+    color: #222;
+    padding: 3px;
 }

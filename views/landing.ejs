@@ -15,9 +15,38 @@
 
 
 <h3>RESOURCES: </h3>
-<% allResources.forEach(function(resource) { %>
-    <p><%= resource %></p>
-<% }) %>
+<div class="resource-container">
+    <% allResources.forEach(function(resource) { %>
+        <div class="resource">
+            <div class="resource-header">
+                <div class="resource-name">
+                    <h5><%= resource.name %></h5>
+                </div>
+                <div class="resource-category">
+                    <div class="main-category">
+                        <span><%= resource.category %></span>
+                    </div>
+                    <div class="resource-sub-categories">
+                        <% resource.sub_category.forEach(function(subCat) { %>
+                            <span><%= subCat %></span>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+            <div class="resource-body">
+                <div class="main-resource">
+                    <a target="_blank" href="<%= resource.main_url %>"><%= resource.main_url %></a>
+                </div>
+                <div class="other-resources">
+                    <% resource.urls.forEach(function(url) { %>
+                        <a target="_blank" href="<%= url %>"><%= url %></a>
+                    <% }) %>
+                </div>
+            </div>
+
+        </div>
+    <% }) %>
+</div>
 
 <h3>NOTES: </h3>
 <% allNotes.forEach(function(note) { %>
@@ -34,7 +63,14 @@
     <% }) %>
 <% }) %>
 
+<ol>
+    <li>olabs.tech - $9.99</li>
+    <li>olabs.world - $1.99</li>
+    <li>olabs.solutions - $1.99</li>
+    <li>olabs.space - $1.99</li>
+    <li>olabs.ventures - $19.99</li>
 
+</ol>
 <form action="/item/add" method="post">
     <h3>Add an Item</h3>
     <input type="text" name="data.name" id="addItemName" placeholder="Name">
