@@ -6,7 +6,7 @@ const expressLayouts = require('express-ejs-layouts')
 
 const app = express()
 
-const port = 5000
+const port = process.env.PORT || 5000
 
 mongoose.connect('mongodb+srv://jonnyo:6LnDvUcM9Ua5H9K4@widespread.yohhvno.mongodb.net/?retryWrites=true&w=majority')
     .then(console.log('Connected to MongoDB'))
