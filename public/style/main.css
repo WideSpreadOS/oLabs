@@ -9,6 +9,10 @@ body {
     background-color: #ececec;
     padding-top: 115px;
 }
+a {
+    text-decoration: none;
+    color: #fff;
+}
 h3 {
     text-align: center;
     margin-top: 30px;

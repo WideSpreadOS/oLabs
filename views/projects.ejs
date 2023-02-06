@@ -28,25 +28,27 @@
 <div class="project-container">
     <% allProjects.forEach(function(project) { %>
         <div class="project">
-            <div class="project-importance">
-                <% if (project.importance_scale >= 8) { %>
-                    <span style="background-color: orangered;"><%= project.importance_scale %></span>
-                <% } %>
-                <% if (project.importance_scale <= 4) { %>
-                    <span style="background-color: yellowgreen;"><%= project.importance_scale %></span>
-                <% } %>
-                <% if (project.importance_scale > 4 && project.importance_scale < 8) { %>
-                    <span style="background-color: #3399cc;"><%= project.importance_scale %></span>
-                <% } %>
-            </div>
-            <div class="project-header">
-                <div class="project-name">
-                    <h5><%= project.title %></h5>
+            <a href="/company/projects/view/single/<%= project.id %>">
+                <div class="project-importance">
+                    <% if (project.importance_scale >= 8) { %>
+                        <span style="background-color: orangered;"><%= project.importance_scale %></span>
+                    <% } %>
+                    <% if (project.importance_scale <= 4) { %>
+                        <span style="background-color: yellowgreen;"><%= project.importance_scale %></span>
+                    <% } %>
+                    <% if (project.importance_scale > 4 && project.importance_scale < 8) { %>
+                        <span style="background-color: #3399cc;"><%= project.importance_scale %></span>
+                    <% } %>
                 </div>
-            </div>
-            <div class="project-body">
-                <p><%= project.description %></p>
-            </div>
+                <div class="project-header">
+                    <div class="project-name">
+                        <h5><%= project.title %></h5>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p><%= project.description %></p>
+                </div>
+            </a>
         </div>
     <% }) %>
 </div>

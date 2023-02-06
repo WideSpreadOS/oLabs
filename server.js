@@ -14,6 +14,8 @@ mongoose.connect('mongodb+srv://jonnyo:6LnDvUcM9Ua5H9K4@widespread.yohhvno.mongo
 const Item = require('./models/Item.js')
 const Resource = require('./models/Resource.js')
 const Note = require('./models/Note.js')
+const Notebook = require('./models/Notebook.js')
+const Task = require('./models/Task.js')
 const Project = require('./models/Project.js')
 
 
@@ -84,6 +86,16 @@ app.get('/company/projects', async (req, res) => {
     res.render('projects', {allProjects})
 
 })
+
+app.get('/company/projects/view/single/:projectId', async (req, res) => {
+    const id = req.params.projectId
+    const project = await Project.findById(id)
+
+    res.render('project-single', { project })
+})
+
+
+
 app.get('/company/inventory', async (req, res) => {
     const allItems = await Item.find()
 

@@ -35,11 +35,19 @@
                     </div>
                 </div>
                 <div class="item-price">
-                    <p><%= parseFloat(item.data.price) %></p>
+                    <% if (item.data.price != '') { %>
+                        <p>$<%= parseFloat(item.data.price) %></p>
+                    <% } else { %>
+                        <p>No Price...</p>
+                    <% } %>
                 </div>
-                <% item.data.photos.forEach(function(photo) { %>
-                    <img src="<%= photo %>" alt="">
-                <% }) %>
+                <% if (item.data.photos.length > 1) { %>
+                    <% if (item.data.photos[0] == '') { %>
+                        <p>No Photos</p>
+                    <% } else { %>
+                        <img src="<%= item.data.photos[0] %>" alt="">
+                    <% } %>
+                <% } %>
             </div>
         <% }) %>
     </div>
@@ -55,6 +63,13 @@
     <form action="/item/add" method="post">
         <input type="text" name="data.name" id="addItemName" placeholder="Name">
         <textarea name="data.description" id="addItemDescription" placeholder="Description..."></textarea>
+        <select name="data.item_type" id="addItemType">
+            <option selected hidden disabled>Item Type</option>
+            <option value="tool">Tool</option>
+            <option value="material">Material</option>
+            <option value="part">Part</option>
+            <option value="other">Other</option>
+        </select>
         <select name="data.category" id="addItemCategory">
             <option selected disabled hidden>Category</option>
             <option value="software">Software</option>
