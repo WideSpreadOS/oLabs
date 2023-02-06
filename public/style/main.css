@@ -15,6 +15,89 @@ h3 {
     font-size: 1.8rem;
     color: #3399cc;
 }
+.hidden {
+    display: none;
+}
+#quickMenuOpen, #quickMenu {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 99500;
+}
+#quickMenuOpen {
+    background-color: #3399cc;
+    padding: 8px;
+    border-radius: 50%;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    font-size: 1.5rem;
+    color: #fff;
+    box-shadow: 2px 5px 5px #00000093;
+    border: solid 2px #fff;
+    border-left: none;
+    padding-right: 12px;
+    height: 50px;
+    line-height: 30px;
+}
+#quickMenu {
+    background-color: #3399cc;
+    border: solid 2px #fff;
+    border-left: none;
+    color: #fff;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: 8px;
+}
+#quickMenuClose, #closeAddNoteBtn,
+#closeAddResourceBtn {
+    background-color: orangered;
+    text-align: center;
+    border-radius: 1rem;
+    width: 90%;
+    padding: 5px;
+    margin-inline: auto;
+    margin-bottom: 10px;
+    color: #fff;
+}
+#addNoteEl h4,
+#addResourceEl h4 {
+    text-align: center;
+    font-size: 2rem;
+    color: #3399cc;
+}
+
+#addNoteEl, #addResourceEl {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #ececec;
+    z-index: 99950;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 5vh;
+    text-align: center;
+}
+#addNoteEl form, #addResourceEl form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 1rem;
+    padding: 8px;
+    z-index: 99999;
+    width: 80vw;
+    height: 60vh;
+
+}
+#addNoteEl form {
+    background-color: #f6e785;
+}
+#addResourceEl form {
+    background-color: #faafa5;
+}
 .move-this-el {
     display: none;
 }
@@ -66,7 +149,7 @@ h3 {
     text-shadow: 0 0 5px #fff;
 }
 .resource-container {
-    background-color: rgba(255, 192, 203, 0.5);
+    background-color: #faafa586;
     min-height: 200px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -86,7 +169,7 @@ h3 {
 }
 
 .resource {
-    background-color: pink;
+    background-color: #faafa5;
     border-radius: 1rem;
     width: 300px;
     min-height: 200px;
@@ -148,7 +231,7 @@ h3 {
 
 
 .note-container {
-    background-color: rgba(255, 255, 0, 0.5);
+    background-color: #f6e78586;
     min-height: 200px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -168,7 +251,7 @@ h3 {
 }
 
 .note {
-    background-color: yellow;
+    background-color: #f6e785;
     border-radius: 1rem;
     min-height: 200px;
     width: 300px;
@@ -211,7 +294,7 @@ h3 {
 
 
 .item-container {
-    background-color: rgba(255, 166, 0, 0.5);
+    background-color: #9fe48186;
     min-height: 200px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -232,7 +315,7 @@ h3 {
 
 .item {
     border-radius: 1rem;
-    background-color: orange;
+    background-color: #9fe481;
     color: #222;
     width: 300px;
     min-width: 300px;
@@ -260,7 +343,7 @@ h3 {
 
 
 .project-container {
-    background-color: rgba(135, 206, 250, 0.5);
+    background-color: #67cfdd86;
     min-height: 200px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -281,7 +364,7 @@ h3 {
 
 .project {
     position: relative;
-    background-color: lightskyblue;
+    background-color: #67d0dd;
     border-radius: 1rem;
     width: 300px;
     max-width: 90vw;
@@ -290,34 +373,32 @@ h3 {
 
 .project-importance {
     position: absolute;
-    top: -25px;
-    right: -25px;
+    top: -18px;
+    right: -18px;
     padding: 0;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 25px;
     color: #fff;
     font-weight: bold;
     text-align: center;
-    line-height: 25px;
 }
 .project-importance span {
     padding: 0;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 25px;
+    font-size: 18px;
     color: #fff;
     font-weight: bold;
     text-align: center;
-    line-height: 25px;
+    line-height: 18px;
 }
 .project-header {
     padding: 10px;

@@ -8,6 +8,116 @@
     <link rel="stylesheet" href="/style/main.css">
 </head>
 <body>
+    <div id="quickMenuOpen" class="quick-menu-button">&#9776;</div>
+    <div id="quickMenu" class="hidden">
+        <div id="quickMenuClose">Close</div>
+        <p id="addNoteBtn">Add Note</p>
+        <p id="addResourceBtn">Add Resource</p>
+    </div>
+
+    <div id="addNoteEl" class="hidden">
+        <div id="closeAddNoteBtn">Close</div>
+        <h4>Add Note</h4>
+        <form action="/note/add" method="post">
+            <input type="text" name="title" id="addNoteTitle" placeholder="Title">
+            <textarea name="body" id="addNoteContent" placeholder="Write a note..."></textarea>
+            <select name="category" id="addNoteCategory">
+                <option selected disabled hidden>Category</option>
+                <option value="software">Software</option>
+                <option value="hardware">Hardware</option>
+                <option value="design">Design</option>
+                <option value="other">Other</option>
+            </select>
+            <div class="sub-categories">
+                <div class="sub-category-item">
+                    <label for="databaseChkNote">Database</label>
+                    <input type="checkbox" name="sub_category" id="databaseChkNote" value="database">
+                </div>
+                <div class="sub-category-item">
+                    <label for="apiChkNote">API</label>
+                    <input type="checkbox" name="sub_category" id="apiChkNote" value="api">
+                </div>
+                <div class="sub-category-item">
+                    <label for="LibraryChkNote">Library</label>
+                    <input type="checkbox" name="sub_category" id="LibraryChkNote" value="library">
+                </div>
+
+
+            </div>
+            <button type="submit">Add</button>
+        </form>
+    </div>
+    <div id="addResourceEl" class="hidden">
+        <div id="closeAddResourceBtn">Close</div>
+        <h4>Add Resource</h4>
+        <form action="/resource/add" method="post">
+            <input type="text" name="name" id="addFormName" placeholder="Name">
+            <input type="url" name="main_url" id="addFormMainUrl" placeholder="Main URL">
+            <select name="category" id="addFormCategory">
+                <option selected disabled hidden>Category</option>
+                <option value="software">Software</option>
+                <option value="hardware">Hardware</option>
+                <option value="design">Design</option>
+                <option value="other">Other</option>
+            </select>
+            <div class="sub-categories">
+                <div class="sub-category-item">
+                    <label for="databaseChk">Database</label>
+                    <input type="checkbox" name="sub_category" id="databaseChk" value="database">
+                </div>
+                <div class="sub-category-item">
+                    <label for="apiChk">API</label>
+                    <input type="checkbox" name="sub_category" id="apiChk" value="api">
+                </div>
+                <div class="sub-category-item">
+                    <label for="LibraryChk">Library</label>
+                    <input type="checkbox" name="sub_category" id="LibraryChk" value="library">
+                </div>
+        
+        
+            </div>
+            <button type="submit">Add</button>
+        </form>
+    </div>
     <%- body %>
+
+    <script>
+        const
+            quickMenuOpen = document.getElementById('quickMenuOpen'),
+            quickMenuClose = document.getElementById('quickMenuClose'),
+            quickMenu = document.getElementById('quickMenu'),
+            addNoteBtn = document.getElementById('addNoteBtn'),
+            addResourceBtn = document.getElementById('addResourceBtn'),
+            closeAddNoteBtn = document.getElementById('closeAddNoteBtn'),
+            closeAddResourceBtn = document.getElementById('closeAddResourceBtn'),
+            addNoteEl = document.getElementById('addNoteEl'),
+            addResourceEl = document.getElementById('addResourceEl')
+
+        quickMenuOpen.addEventListener('click', e => {
+            quickMenu.classList.toggle('hidden')
+            quickMenuOpen.classList.toggle('hidden')
+        })
+        quickMenuClose.addEventListener('click', e => {
+            quickMenu.classList.toggle('hidden')
+            quickMenuOpen.classList.toggle('hidden')
+        })
+        addNoteBtn.addEventListener('click', e => {
+            quickMenu.classList.toggle('hidden')
+            quickMenuOpen.classList.toggle('hidden')
+            addNoteEl.classList.toggle('hidden')
+        })
+        closeAddNoteBtn.addEventListener('click', e => {
+            addNoteEl.classList.toggle('hidden')
+        })
+        addResourceBtn.addEventListener('click', e => {
+            quickMenu.classList.toggle('hidden')
+            quickMenuOpen.classList.toggle('hidden')
+            addResourceEl.classList.toggle('hidden')
+        })
+        closeAddResourceBtn.addEventListener('click', e => {
+            addResourceEl.classList.toggle('hidden')
+        })
+
+    </script>
 </body>
 </html>
