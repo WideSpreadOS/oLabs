@@ -7,11 +7,19 @@
 body {
     background-color: #ececec;
 }
-
+h3 {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 3rem;
+}
 
 
 
 .resource-container {
+    background-color: rgba(255, 192, 203, 0.5);
+        min-height: 200px;
+        padding-top: 30px;
+        padding-bottom: 30px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -58,6 +66,10 @@ body {
 
 
 .note-container {
+    background-color: rgba(255, 255, 0, 0.5);
+        min-height: 200px;
+        padding-top: 30px;
+        padding-bottom: 30px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -103,9 +115,13 @@ body {
 
 
 .item-container {
+    background-color: rgba(255, 166, 0, 0.5);
+        min-height: 200px;
+        padding-top: 30px;
+        padding-bottom: 30px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
     justify-content: center;
     gap: 1rem;
 }
@@ -114,6 +130,7 @@ body {
     border-radius: 1rem;
     background-color: orange;
     color: #222;
+    width: 300px;
     max-width: 90vw;
     display: flex;
     flex-direction: column;
@@ -134,4 +151,56 @@ body {
 .item img {
     max-width: 90%;
     border-radius: 1rem;
+}
+
+
+.project-container {
+    background-color: rgba(135, 206, 250, 0.5);
+    min-height: 200px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+
+.project {
+    position: relative;
+    background-color: lightskyblue;
+    border-radius: 1rem;
+    width: 300px;
+    max-width: 90vw;
+}
+
+.project-importance {
+    position: absolute;
+    top: -25px;
+    right: -25px;
+    padding: 10px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 0, 0, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: bold;
+}
+
+.project-header {
+    padding: 10px;
+    border-bottom: solid 1px #fff;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.project-body {
+    padding: 10px;
+    margin-bottom: 10px;
+
 }

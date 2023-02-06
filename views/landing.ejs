@@ -14,7 +14,7 @@
 
 
 
-<h3>RESOURCES: </h3>
+<h3>RESOURCES</h3>
 
 <div class="resource-container">
     <% allResources.forEach(function(resource) { %>
@@ -51,7 +51,7 @@
 
 
 
-<h3>NOTES: </h3>
+<h3>NOTES</h3>
 
 <div class="note-container">
     <% allNotes.forEach(function(note) { %>
@@ -85,7 +85,7 @@
 
 
 
-<h3>ITEMS: </h3>
+<h3>ITEMS</h3>
 
 <div class="item-container">
     <% allItems.forEach(function(item) { %>
@@ -106,7 +106,24 @@
 </div>
 
 
-
+<h3>PROJECTS</h3>
+<div class="project-container">
+    <% allProjects.forEach(function(project) { %>
+        <div class="project">
+            <div class="project-importance">
+                <span><%= project.importance_scale %></span>
+            </div>
+            <div class="project-header">
+                <div class="project-name">
+                    <h5><%= project.title %></h5>
+                </div>
+            </div>
+            <div class="project-body">
+                <p><%= project.description %></p>
+            </div>
+        </div>
+    <% }) %>
+</div>
 <hr style="margin-top: 200px;">
 
 <h1>DATA</h1>
@@ -236,3 +253,47 @@
     <button type="submit">Add</button>
 </form>
 
+
+
+<form action="/project/add" method="post">
+    <h3>Add a Project</h3>
+    <input type="text" name="title" id="addProjectName" placeholder="Title">
+    <textarea name="description" id="addProjectDescription" placeholder="Description..."></textarea>
+    <label for="addProjectImportance">Project Importance <span id="importanceValue">5</span></label>
+    <input type="range" name="importance_scale" id="addProjectImportance" min="0" max="10">
+    <select name="category" id="addProjectCategory">
+        <option selected disabled hidden>Category</option>
+        <option value="software">Software</option>
+        <option value="hardware">Hardware</option>
+        <option value="design">Design</option>
+        <option value="other">Other</option>
+    </select>
+    <div class="sub-categories">
+        <div class="sub-category-item">
+            <label for="databaseChkProject">Database</label>
+            <input type="checkbox" name="sub_category" id="databaseChkProject" value="database">
+        </div>
+        <div class="sub-category-item">
+            <label for="apiChkProject">API</label>
+            <input type="checkbox" name="sub_category" id="apiChkProject" value="api">
+        </div>
+        <div class="sub-category-item">
+            <label for="LibraryChkProject">Library</label>
+            <input type="checkbox" name="sub_category" id="LibraryChkProject" value="library">
+        </div>
+
+
+    </div>
+    <button type="submit">Add</button>
+</form>
+
+
+<script>
+    const 
+        addProjectImportance = document.getElementById('addProjectImportance'),
+        importanceValue = document.getElementById('importanceValue')
+
+    addProjectImportance.addEventListener('change', e => {
+        importanceValue.innerText = e.target.value
+    })
+</script>

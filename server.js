@@ -11,9 +11,10 @@ const port = process.env.PORT || 5000
 mongoose.connect('mongodb+srv://jonnyo:6LnDvUcM9Ua5H9K4@widespread.yohhvno.mongodb.net/?retryWrites=true&w=majority')
     .then(console.log('Connected to MongoDB'))
 
-    const Item = require('./models/Item.js')
+const Item = require('./models/Item.js')
 const Resource = require('./models/Resource.js')
 const Note = require('./models/Note.js')
+const Project = require('./models/Project.js')
 
 
 // Middleware
@@ -33,7 +34,8 @@ app.get('/', async (req, res) => {
     const allResources = await Resource.find()
     const allNotes = await Note.find()
     const allItems = await Item.find()
-    res.render('landing', {allResources, allNotes, allItems})
+    const allProjects = await Project.find()
+    res.render('landing', {allResources, allNotes, allItems, allProjects})
 
 })
 
@@ -58,6 +60,14 @@ app.post('/note/add', async (req, res) => {
     console.log(data)
     const newNote = new Note(data)
     newNote.save()
+    res.redirect('/')
+})
+
+app.post('/project/add', async (req, res) => {
+    const data = req.body
+    console.log(data)
+    const newProject = new Project(data)
+    newProject.save()
     res.redirect('/')
 })
 
