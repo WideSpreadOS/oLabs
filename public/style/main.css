@@ -7,18 +7,53 @@
 
 body {
     background-color: #ececec;
+    padding-top: 115px;
 }
 h3 {
     text-align: center;
     margin-top: 30px;
-    font-size: 3rem;
+    font-size: 1.8rem;
     color: #3399cc;
 }
-
+.move-this-el {
+    display: none;
+}
+.logo-container {
+    width: 100vw;
+    max-width: 100vw;
+    max-height: 100vh;
+}
+    
+.logo-container img {
+    max-width: 100%;
+    max-height: 100%;
+    filter: drop-shadow(0 0 8px #3399cc);
+}
+.page-header {
+    margin-top: 50px;
+}
+.page-header h1 {
+    text-align: center;
+    color: #3399cc;
+    font-size: 2.5rem;
+}
 #nav {
     background-color: #3399cc;
-    margin-top: 50px;
     padding: 8px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    box-shadow: 0 10px 15px #00000081;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 90000;
 }
 #nav a {
     padding: 8px;
@@ -26,18 +61,28 @@ h3 {
     color: #fff;
     text-decoration: none;
 }
-
+#nav a.active-link {
+    color: #004e75;
+    text-shadow: 0 0 5px #fff;
+}
 .resource-container {
     background-color: rgba(255, 192, 203, 0.5);
-        min-height: 200px;
-        padding-top: 30px;
-        padding-bottom: 30px;
+    min-height: 200px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-evenly;
-    gap: 1rem;
+    gap: 2rem;
+    width: 95%;
+    margin-inline: auto;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-top: 30px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 .resource {
@@ -59,10 +104,35 @@ h3 {
 }
 
 .main-category {
-    color: #888;
-    padding: 3px;
+    color: #3399cc;
+    text-transform: uppercase;
+    font-weight: bolder;
+    padding: 4px;
+    margin-bottom: 4px;
+    text-shadow: 0 0 2px #fff;
 }
-
+.note-sub-categories {
+    color: #333;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    border-top: solid 1px #3399cc;
+    border-bottom: solid 1px #3399cc;
+    margin-bottom: 10px;
+}
+.note-sub-categories span {
+    border-right: solid 1px #3399cc;
+    padding: 4px;
+    text-align: center;
+    width: 30%;
+}
+.note-sub-categories span:last-child {
+    border-right: none;
+}
 .resource-body {
     padding: 10px;
 }
@@ -79,15 +149,22 @@ h3 {
 
 .note-container {
     background-color: rgba(255, 255, 0, 0.5);
-        min-height: 200px;
-        padding-top: 30px;
-        padding-bottom: 30px;
+    min-height: 200px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-evenly;
-    gap: 1rem;
+    gap: 2rem;
+    width: 95%;
+    margin-inline: auto;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-top: 30px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 .note {
@@ -103,13 +180,20 @@ h3 {
 .note-header {
     text-align: center;
     color: #555;
+    border-bottom: solid 1px #797725;
 }
 
 .note-title {
     font-size: 1.5rem;
+    padding: 5px;
     color: #222;
+    border-bottom: solid 1px #797725;
 }
-
+.note-categories {
+    padding: 6px;
+    background-color: #79782571;
+    box-shadow: inset 0 0 20px #00000081;
+}
 .note-body {
     padding: 10px;
 }
@@ -122,20 +206,28 @@ h3 {
     text-align: right;
     font-size: 0.8rem;
     border-top: solid 1px #222;
-    padding: 3px;
+    padding: 8px;
 }
 
 
 .item-container {
     background-color: rgba(255, 166, 0, 0.5);
-        min-height: 200px;
-        padding-top: 30px;
-        padding-bottom: 30px;
+    min-height: 200px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: flex-start;
     justify-content: center;
-    gap: 1rem;
+    gap: 2rem;
+    width: 95%;
+    margin-inline: auto;
+    border-radius: 1rem;
+    margin-top: 30px;
+    padding: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 .item {
@@ -143,6 +235,7 @@ h3 {
     background-color: orange;
     color: #222;
     width: 300px;
+    min-width: 300px;
     max-width: 90vw;
     display: flex;
     flex-direction: column;
@@ -176,7 +269,14 @@ h3 {
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-evenly;
-    gap: 1rem;
+    gap: 2rem;
+    width: 95%;
+    margin-inline: auto;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-top: 30px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 .project {
@@ -185,34 +285,74 @@ h3 {
     border-radius: 1rem;
     width: 300px;
     max-width: 90vw;
+
 }
 
 .project-importance {
     position: absolute;
     top: -25px;
     right: -25px;
-    padding: 10px;
+    padding: 0;
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    background-color: rgba(255, 0, 0, 1);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 25px;
     color: #fff;
     font-weight: bold;
+    text-align: center;
+    line-height: 25px;
 }
-
+.project-importance span {
+    padding: 0;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    line-height: 25px;
+}
 .project-header {
     padding: 10px;
     border-bottom: solid 1px #fff;
     font-size: 1.5rem;
     text-align: center;
 }
-
+.project-name {
+    color: #fff;
+}
 .project-body {
     padding: 10px;
     margin-bottom: 10px;
 
+}
+
+
+.item, .resource, .note, .project, .notebook {
+    box-shadow: 0 10px 15px #0000008f;
+}
+
+
+@media screen and (min-width: 800px) {
+    body {
+    }
+    .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 100px;
+    }
+    .logo-container img {
+        max-width: 100%;
+        max-height: 50vh;
+        margin-inline: auto;
+        filter: drop-shadow(0 0 8px #3399cc);
+    }
 }

@@ -2,11 +2,106 @@
 
 </style>
 
-
-
-<h1>oLabs Inventory</h1>
-
 <div id="nav">
-    <a href="/">Landing</a>
-    <a href="/company/inventory">Inventory</a>
+    <a href="/">Home</a>
+    <a href="/company/projects">Projects</a>
+    <a href="/company/inventory" class="active-link">Inventory</a>
+    <a href="/company/resources">Resources</a>
+    <a href="/company/notes">Notes</a>
 </div>
+
+<div class="logo-container">
+    <img src="/images/system/olabs_logo_1a1a1a.png" alt="oLabs Logo">
+</div>
+
+
+<div class="page-header">
+    <h1>Inventory</h1>
+</div>
+
+
+<section>
+    <div class="section-header">
+        <h3>Current</h3>
+    </div>
+
+
+    <div class="item-container">
+        <% allItems.forEach(function(item) { %>
+            <div class="item">
+                <div class="item-header">
+                    <div class="item-name">
+                        <h5><%= item.data.name %></h5>
+                    </div>
+                </div>
+                <div class="item-price">
+                    <p><%= parseFloat(item.data.price) %></p>
+                </div>
+                <% item.data.photos.forEach(function(photo) { %>
+                    <img src="<%= photo %>" alt="">
+                <% }) %>
+            </div>
+        <% }) %>
+    </div>
+</section>
+
+
+
+<section>
+    <div class="section-header">
+        <h3>Add New Item</h3>
+    </div>
+    
+    <form action="/item/add" method="post">
+        <input type="text" name="data.name" id="addItemName" placeholder="Name">
+        <textarea name="data.description" id="addItemDescription" placeholder="Description..."></textarea>
+        <select name="data.category" id="addItemCategory">
+            <option selected disabled hidden>Category</option>
+            <option value="software">Software</option>
+            <option value="hardware">Hardware</option>
+            <option value="design">Design</option>
+            <option value="other">Other</option>
+        </select>
+
+        <div class="sub-categories">
+            <div class="sub-category-item">
+                <label for="databaseChkItem">Database</label>
+                <input type="checkbox" name="data.sub_category" id="databaseChkItem" value="database">
+            </div>
+            <div class="sub-category-item">
+                <label for="apiChkItem">API</label>
+                <input type="checkbox" name="data.sub_category" id="apiChkItem" value="api">
+            </div>
+            <div class="sub-category-item">
+                <label for="LibraryChkItem">Library</label>
+                <input type="checkbox" name="data.sub_category" id="LibraryChkItem" value="library">
+            </div>
+
+
+        </div>
+
+        <input type="url" name="data.photos" placeholder="Photo URL">
+        <input type="url" name="data.photos" placeholder="Photo URL">
+        <input type="url" name="data.photos" placeholder="Photo URL">
+        <input type="url" name="data.photos" placeholder="Photo URL">
+        <input type="url" name="data.photos" placeholder="Photo URL">
+
+        <!-- DIMENSIONS -->
+        <input type="number" name="data.dimensions.w" id="addItemWidth" step="any" placeholder="Width">
+        <input type="number" name="data.dimensions.h" id="addItemHeight" step="any" placeholder="Height">
+        <input type="number" name="data.dimensions.d" id="addItemDepth" step="any" placeholder="Depth">
+        <select name="data.weight.measurment" id="addItemWeightMeasurement">
+            <option selected hidden disabled>Lb/Kg</option>
+            <option value="lb">lb - Pounds (US)</option>
+            <option value="kg">kg - Kilograms (Metric)</option>
+        </select>
+
+
+        <input type="number" name="data.weight.mass" id="addItemWeight" step="any" placeholder="Weight">
+
+        <input type="number" name="data.price" id="addItemPriceAmt" step="any" placeholder="Price">
+
+
+        <button type="submit">Add</button>
+    </form>
+</section>

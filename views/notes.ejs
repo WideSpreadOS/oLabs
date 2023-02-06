@@ -1,0 +1,91 @@
+<style>
+
+</style>
+
+
+<div id="nav">
+    <a href="/">Home</a>
+    <a href="/company/projects">Projects</a>
+    <a href="/company/inventory">Inventory</a>
+    <a href="/company/resources">Resources</a>
+    <a href="/company/notes" class="active-link">Notes</a>
+</div>
+
+<div class="logo-container">
+    <img src="/images/system/olabs_logo_1a1a1a.png" alt="oLabs Logo">
+</div>
+
+
+<div class="page-header">
+    <h1>Notes</h1>
+</div>
+
+
+<section>
+    <div class="section-header">
+        <h3>Current</h3>
+    </div>
+<div class="note-container">
+    <% allNotes.forEach(function(note) { %>
+        <div class="note">
+            <div class="note-header">
+                <div class="note-title">
+                    <h5><%= note.title %></h5>
+                </div>
+                <div class="note-categories">
+                    <div class="main-category">
+                        <span><%= note.category %></span>
+                    </div>
+                    <div class="note-sub-categories">
+                        <% note.sub_category.forEach(function(cat) { %>
+                            <span><%= cat %></span>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+            <div class="note-body">
+                <p><%= note.body %></p>
+            </div>
+            <div class="note-added">
+                <span><%= note.added.toLocaleDateString("en-US") %> - <%= note.added.toLocaleTimeString() %></span>
+            </div>
+        </div>
+    <% }) %>
+</div>
+</section>
+
+<section>
+    <div class="section-header">
+        <h3>Add New Note</h3>
+    </div>
+
+    <form action="/note/add" method="post">
+        <input type="text" name="title" id="addNoteTitle" placeholder="Title">
+        <textarea name="body" id="addNoteContent" placeholder="Write a note..."></textarea>
+        <select name="category" id="addNoteCategory">
+            <option selected disabled hidden>Category</option>
+            <option value="software">Software</option>
+            <option value="hardware">Hardware</option>
+            <option value="design">Design</option>
+            <option value="other">Other</option>
+        </select>
+        <div class="sub-categories">
+            <div class="sub-category-item">
+                <label for="databaseChkNote">Database</label>
+                <input type="checkbox" name="sub_category" id="databaseChkNote" value="database">
+            </div>
+            <div class="sub-category-item">
+                <label for="apiChkNote">API</label>
+                <input type="checkbox" name="sub_category" id="apiChkNote" value="api">
+            </div>
+            <div class="sub-category-item">
+                <label for="LibraryChkNote">Library</label>
+                <input type="checkbox" name="sub_category" id="LibraryChkNote" value="library">
+            </div>
+
+
+        </div>
+        <button type="submit">Add</button>
+    </form>
+
+</section>

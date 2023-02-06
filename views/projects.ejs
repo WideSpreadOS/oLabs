@@ -1,0 +1,101 @@
+<style>
+
+</style>
+
+
+<div id="nav">
+    <a href="/">Home</a>
+    <a href="/company/projects" class="active-link">Projects</a>
+    <a href="/company/inventory">Inventory</a>
+    <a href="/company/resources">Resources</a>
+    <a href="/company/notes">Notes</a>
+</div>
+
+<div class="logo-container">
+    <img src="/images/system/olabs_logo_1a1a1a.png" alt="oLabs Logo">
+</div>
+
+
+<div class="page-header">
+    <h1>Projects</h1>
+</div>
+
+
+<section>
+    <div class="section-header">
+        <h3>Current</h3>
+    </div>
+<div class="project-container">
+    <% allProjects.forEach(function(project) { %>
+        <div class="project">
+            <div class="project-importance">
+                <% if (project.importance_scale >= 8) { %>
+                    <span style="background-color: orangered;"><%= project.importance_scale %></span>
+                <% } %>
+                <% if (project.importance_scale <= 4) { %>
+                    <span style="background-color: yellowgreen;"><%= project.importance_scale %></span>
+                <% } %>
+                <% if (project.importance_scale > 4 && project.importance_scale < 8) { %>
+                    <span style="background-color: #3399cc;"><%= project.importance_scale %></span>
+                <% } %>
+            </div>
+            <div class="project-header">
+                <div class="project-name">
+                    <h5><%= project.title %></h5>
+                </div>
+            </div>
+            <div class="project-body">
+                <p><%= project.description %></p>
+            </div>
+        </div>
+    <% }) %>
+</div>
+</section>
+
+<section>
+    <div class="section-header">
+        <h3>Add New Project</h3>
+    </div>
+<form action="/project/add" method="post">
+    <input type="text" name="title" id="addProjectName" placeholder="Title">
+    <textarea name="description" id="addProjectDescription" placeholder="Description..."></textarea>
+    <label for="addProjectImportance">Project Importance <span id="importanceValue">5</span></label>
+    <input type="range" name="importance_scale" id="addProjectImportance" min="0" max="10">
+    <select name="category" id="addProjectCategory">
+        <option selected disabled hidden>Category</option>
+        <option value="software">Software</option>
+        <option value="hardware">Hardware</option>
+        <option value="design">Design</option>
+        <option value="other">Other</option>
+    </select>
+    <div class="sub-categories">
+        <div class="sub-category-item">
+            <label for="databaseChkProject">Database</label>
+            <input type="checkbox" name="sub_category" id="databaseChkProject" value="database">
+        </div>
+        <div class="sub-category-item">
+            <label for="apiChkProject">API</label>
+            <input type="checkbox" name="sub_category" id="apiChkProject" value="api">
+        </div>
+        <div class="sub-category-item">
+            <label for="LibraryChkProject">Library</label>
+            <input type="checkbox" name="sub_category" id="LibraryChkProject" value="library">
+        </div>
+
+
+    </div>
+    <button type="submit">Add</button>
+</form>
+
+</section>
+
+
+<script>
+    const 
+        addProjectImportance = document.getElementById('addProjectImportance'),
+        importanceValue = document.getElementById('importanceValue')
+
+    addProjectImportance.addEventListener('change', e => {
+        importanceValue.innerText = e.target.value
+    })
+</script>

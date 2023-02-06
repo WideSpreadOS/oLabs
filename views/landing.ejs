@@ -1,5 +1,6 @@
 <style>
     .logo-container {
+        width: 100vw;
         max-width: 100vw;
         max-height: 100vh;
     }
@@ -10,296 +11,42 @@
 </style>
 
 
-<div class="logo-container">
+<div id="nav">
+    <a href="/" class="active-link">Home</a>
+    <a href="/company/projects">Projects</a>
+    <a href="/company/inventory">Inventory</a>
+    <a href="/company/resources">Resources</a>
+    <a href="/company/notes">Notes</a>
+</div>
+
+<div class="logo-container" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);z-index: -100;">
     <img src="/images/system/olabs_logo_1a1a1a.png" alt="oLabs Logo">
 </div>
 
 
-<div id="nav">
-    <a href="/">Landing</a>
-    <a href="/company/inventory">Inventory</a>
-</div>
 
-<h3>RESOURCES</h3>
+<div class="move-this-el">
 
-<div class="resource-container">
-    <% allResources.forEach(function(resource) { %>
-        <div class="resource">
-            <div class="resource-header">
-                <div class="resource-name">
-                    <h5><%= resource.name %></h5>
-                </div>
-                <div class="resource-category">
-                    <div class="main-category">
-                        <span><%= resource.category %></span>
-                    </div>
-                    <div class="resource-sub-categories">
-                        <% resource.sub_category.forEach(function(subCat) { %>
-                            <span><%= subCat %></span>
-                        <% }) %>
-                    </div>
-                </div>
-            </div>
-            <div class="resource-body">
-                <div class="main-resource">
-                    <a target="_blank" href="<%= resource.main_url %>"><%= resource.main_url %></a>
-                </div>
-                <div class="other-resources">
-                    <% resource.urls.forEach(function(url) { %>
-                        <a target="_blank" href="<%= url %>"><%= url %></a>
-                    <% }) %>
-                </div>
-            </div>
-
-        </div>
-    <% }) %>
-</div>
-
-
-
-<h3>NOTES</h3>
-
-<div class="note-container">
-    <% allNotes.forEach(function(note) { %>
-        <div class="note">
-            <div class="note-header">
-                <div class="note-title">
-                    <h5><%= note.title %></h5>
-                </div>
-                <div class="note-categories">
-                    <div class="main-category">
-                        <span><%= note.category %></span>
-                    </div>
-                    <div class="note-sub-categories">
-                        <% note.sub_category.forEach(function(cat) { %>
-                            <span><%= cat %></span>
-                        <% }) %>
-                    </div>
-                </div>
-            </div>
-            <div class="note-body">
-                <p><%= note.body %></p>
-            </div>
-            <div class="note-added">
-                <span><%= note.added.toLocaleDateString("en-US") %> - <%= note.added.toLocaleTimeString() %></span>
-            </div>
-        </div>
-    <% }) %>
-</div>
-
-
-
-
-
-<h3>ITEMS</h3>
-
-<div class="item-container">
-    <% allItems.forEach(function(item) { %>
-        <div class="item">
-            <div class="item-header">
-                <div class="item-name">
-                    <h5><%= item.data.name %></h5>
-                </div>
-            </div>
-            <div class="item-price">
-                <p><%= parseFloat(item.data.price) %></p>
-            </div>
-            <% item.data.photos.forEach(function(photo) { %>
-                <img src="<%= photo %>" alt="">
-            <% }) %>
-        </div>
-    <% }) %>
-</div>
-
-
-<h3>PROJECTS</h3>
-<div class="project-container">
-    <% allProjects.forEach(function(project) { %>
-        <div class="project">
-            <div class="project-importance">
-                <span><%= project.importance_scale %></span>
-            </div>
-            <div class="project-header">
-                <div class="project-name">
-                    <h5><%= project.title %></h5>
-                </div>
-            </div>
-            <div class="project-body">
-                <p><%= project.description %></p>
-            </div>
-        </div>
-    <% }) %>
-</div>
-<hr style="margin-top: 200px;">
-
-<h1>DATA</h1>
-<ol>
-    <li>olabs.tech - $9.99</li>
-    <li>olabs.world - $1.99</li>
-    <li>olabs.solutions - $1.99</li>
-    <li>olabs.space - $1.99</li>
-    <li>olabs.ventures - $19.99</li>
-
-</ol>
-<form action="/item/add" method="post">
-    <h3>Add an Item</h3>
-    <input type="text" name="data.name" id="addItemName" placeholder="Name">
-    <textarea name="data.description" id="addItemDescription" placeholder="Description..."></textarea>
-    <select name="data.category" id="addItemCategory">
-        <option selected disabled hidden>Category</option>
-        <option value="software">Software</option>
-        <option value="hardware">Hardware</option>
-        <option value="design">Design</option>
-        <option value="other">Other</option>
-    </select>
-
-    <div class="sub-categories">
-        <div class="sub-category-item">
-            <label for="databaseChkItem">Database</label>
-            <input type="checkbox" name="data.sub_category" id="databaseChkItem" value="database">
-        </div>
-        <div class="sub-category-item">
-            <label for="apiChkItem">API</label>
-            <input type="checkbox" name="data.sub_category" id="apiChkItem" value="api">
-        </div>
-        <div class="sub-category-item">
-            <label for="LibraryChkItem">Library</label>
-            <input type="checkbox" name="data.sub_category" id="LibraryChkItem" value="library">
-        </div>
-
-
-    </div>
-
-    <input type="url" name="data.photos" placeholder="Photo URL">
-    <input type="url" name="data.photos" placeholder="Photo URL">
-    <input type="url" name="data.photos" placeholder="Photo URL">
-    <input type="url" name="data.photos" placeholder="Photo URL">
-    <input type="url" name="data.photos" placeholder="Photo URL">
     
-    <!-- DIMENSIONS -->
-    <input type="number" name="data.dimensions.w" id="addItemWidth" step="any" placeholder="Width">
-    <input type="number" name="data.dimensions.h" id="addItemHeight" step="any" placeholder="Height">
-    <input type="number" name="data.dimensions.d" id="addItemDepth" step="any" placeholder="Depth">
-    <select name="data.weight.measurment" id="addItemWeightMeasurement">
-        <option selected hidden disabled>Lb/Kg</option>
-        <option value="lb">lb - Pounds (US)</option>
-        <option value="kg">kg - Kilograms (Metric)</option>
-    </select>
-
-
-    <input type="number" name="data.weight.mass" id="addItemWeight" step="any" placeholder="Weight">
-    
-    <input type="number" name="data.price" id="addItemPriceAmt" step="any" placeholder="Price">
-
-
-    <button type="submit">Add</button>
-</form>
-
-
-<form action="/resource/add" method="post">
-    <h3>Add a Resource</h3>
-    <input type="text" name="name" id="addFormName" placeholder="Name">
-    <input type="url" name="main_url" id="addFormMainUrl" placeholder="Main URL">
-    <select name="category" id="addFormCategory">
-        <option selected disabled hidden>Category</option>
-        <option value="software">Software</option>
-        <option value="hardware">Hardware</option>
-        <option value="design">Design</option>
-        <option value="other">Other</option>
-    </select>
-    <div class="sub-categories">
-        <div class="sub-category-item">
-            <label for="databaseChk">Database</label>
-            <input type="checkbox" name="sub_category" id="databaseChk" value="database">
-        </div>
-        <div class="sub-category-item">
-            <label for="apiChk">API</label>
-            <input type="checkbox" name="sub_category" id="apiChk" value="api">
-        </div>
-        <div class="sub-category-item">
-            <label for="LibraryChk">Library</label>
-            <input type="checkbox" name="sub_category" id="LibraryChk" value="library">
-        </div>
-
-
-    </div>
-    <button type="submit">Add</button>
-</form>
+    <h1>DATA</h1>
+    <ol>
+        <li>olabs.tech - $9.99</li>
+        <li>olabs.world - $1.99</li>
+        <li>olabs.solutions - $1.99</li>
+        <li>olabs.space - $1.99</li>
+        <li>olabs.ventures - $19.99</li>
+        
+    </ol>
+</div>
 
 
 
 
-<form action="/note/add" method="post">
-    <h3>Add a Note</h3>
-    <input type="text" name="title" id="addNoteTitle" placeholder="Title">
-    <textarea name="body" id="addNoteContent" placeholder="Write a note..."></textarea>
-    <select name="category" id="addNoteCategory">
-        <option selected disabled hidden>Category</option>
-        <option value="software">Software</option>
-        <option value="hardware">Hardware</option>
-        <option value="design">Design</option>
-        <option value="other">Other</option>
-    </select>
-    <div class="sub-categories">
-        <div class="sub-category-item">
-            <label for="databaseChkNote">Database</label>
-            <input type="checkbox" name="sub_category" id="databaseChkNote" value="database">
-        </div>
-        <div class="sub-category-item">
-            <label for="apiChkNote">API</label>
-            <input type="checkbox" name="sub_category" id="apiChkNote" value="api">
-        </div>
-        <div class="sub-category-item">
-            <label for="LibraryChkNote">Library</label>
-            <input type="checkbox" name="sub_category" id="LibraryChkNote" value="library">
-        </div>
-
-
-    </div>
-    <button type="submit">Add</button>
-</form>
 
 
 
-<form action="/project/add" method="post">
-    <h3>Add a Project</h3>
-    <input type="text" name="title" id="addProjectName" placeholder="Title">
-    <textarea name="description" id="addProjectDescription" placeholder="Description..."></textarea>
-    <label for="addProjectImportance">Project Importance <span id="importanceValue">5</span></label>
-    <input type="range" name="importance_scale" id="addProjectImportance" min="0" max="10">
-    <select name="category" id="addProjectCategory">
-        <option selected disabled hidden>Category</option>
-        <option value="software">Software</option>
-        <option value="hardware">Hardware</option>
-        <option value="design">Design</option>
-        <option value="other">Other</option>
-    </select>
-    <div class="sub-categories">
-        <div class="sub-category-item">
-            <label for="databaseChkProject">Database</label>
-            <input type="checkbox" name="sub_category" id="databaseChkProject" value="database">
-        </div>
-        <div class="sub-category-item">
-            <label for="apiChkProject">API</label>
-            <input type="checkbox" name="sub_category" id="apiChkProject" value="api">
-        </div>
-        <div class="sub-category-item">
-            <label for="LibraryChkProject">Library</label>
-            <input type="checkbox" name="sub_category" id="LibraryChkProject" value="library">
-        </div>
 
 
-    </div>
-    <button type="submit">Add</button>
-</form>
 
 
-<script>
-    const 
-        addProjectImportance = document.getElementById('addProjectImportance'),
-        importanceValue = document.getElementById('importanceValue')
 
-    addProjectImportance.addEventListener('change', e => {
-        importanceValue.innerText = e.target.value
-    })
-</script>

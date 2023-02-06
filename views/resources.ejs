@@ -1,0 +1,98 @@
+<style>
+
+</style>
+
+
+<div id="nav">
+    <a href="/">Home</a>
+    <a href="/company/projects">Projects</a>
+    <a href="/company/inventory">Inventory</a>
+    <a href="/company/resources" class="active-link">Resources</a>
+    <a href="/company/notes">Notes</a>
+</div>
+
+<div class="logo-container">
+    <img src="/images/system/olabs_logo_1a1a1a.png" alt="oLabs Logo">
+</div>
+
+
+<div class="page-header">
+    <h1>Resources</h1>
+</div>
+
+
+<section>
+    <div class="section-header">
+        <h3>Current</h3>
+    </div>
+
+    <div class="resource-container">
+        <% allResources.forEach(function(resource) { %>
+            <div class="resource">
+                <div class="resource-header">
+                    <div class="resource-name">
+                        <h5><%= resource.name %></h5>
+                    </div>
+                    <div class="resource-category">
+                        <div class="main-category">
+                            <span><%= resource.category %></span>
+                        </div>
+                        <div class="resource-sub-categories">
+                            <% resource.sub_category.forEach(function(subCat) { %>
+                                <span><%= subCat %></span>
+                            <% }) %>
+                        </div>
+                    </div>
+                </div>
+                <div class="resource-body">
+                    <div class="main-resource">
+                        <a target="_blank" href="<%= resource.main_url %>"><%= resource.main_url %></a>
+                    </div>
+                    <div class="other-resources">
+                        <% resource.urls.forEach(function(url) { %>
+                            <a target="_blank" href="<%= url %>"><%= url %></a>
+                        <% }) %>
+                    </div>
+                </div>
+
+            </div>
+        <% }) %>
+    </div>
+
+
+</section>
+
+<section>
+    <div class="section-header">
+        <h3>Add New Resource</h3>
+    </div>
+
+    <form action="/resource/add" method="post">
+        <input type="text" name="name" id="addFormName" placeholder="Name">
+        <input type="url" name="main_url" id="addFormMainUrl" placeholder="Main URL">
+        <select name="category" id="addFormCategory">
+            <option selected disabled hidden>Category</option>
+            <option value="software">Software</option>
+            <option value="hardware">Hardware</option>
+            <option value="design">Design</option>
+            <option value="other">Other</option>
+        </select>
+        <div class="sub-categories">
+            <div class="sub-category-item">
+                <label for="databaseChk">Database</label>
+                <input type="checkbox" name="sub_category" id="databaseChk" value="database">
+            </div>
+            <div class="sub-category-item">
+                <label for="apiChk">API</label>
+                <input type="checkbox" name="sub_category" id="apiChk" value="api">
+            </div>
+            <div class="sub-category-item">
+                <label for="LibraryChk">Library</label>
+                <input type="checkbox" name="sub_category" id="LibraryChk" value="library">
+            </div>
+
+
+        </div>
+        <button type="submit">Add</button>
+    </form>
+</section>

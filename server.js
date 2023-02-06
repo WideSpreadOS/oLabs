@@ -71,8 +71,28 @@ app.post('/project/add', async (req, res) => {
     res.redirect('/')
 })
 
-app.get('/company/inventory', (req, res) => {
-    res.render('inventory')
+app.get('/company/projects', async (req, res) => {
+    const allProjects = await Project.find()
+
+    res.render('projects', {allProjects})
+
+})
+app.get('/company/inventory', async (req, res) => {
+    const allItems = await Item.find()
+
+    res.render('inventory', {allItems})
+
+})
+app.get('/company/resources', async (req, res) => {
+    const allResources = await Resource.find()
+
+    res.render('resources', {allResources})
+
+})
+app.get('/company/notes', async (req, res) => {
+    const allNotes = await Note.find()
+
+    res.render('notes', {allNotes})
 
 })
 
