@@ -47,6 +47,13 @@ app.post('/item/add', async (req, res) => {
     res.redirect('/')
 })
 
+
+app.get('/company/resources/view/single/:resourceId', async (req, res) => {
+    const id = req.params.resourceId
+    const resource = await Resource.findById(id)
+
+    res.render('resource-single', {resource})
+})
 app.post('/resource/add', async (req, res) => {
     const data = req.body
     console.log(data)

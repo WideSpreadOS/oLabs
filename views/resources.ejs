@@ -26,39 +26,25 @@
         <h3>Current</h3>
     </div>
 
-    <div class="resource-container">
-        <% allResources.forEach(function(resource) { %>
-            <div class="resource">
-                <div class="resource-header">
-                    <div class="resource-name">
-                        <h5><%= resource.name %></h5>
-                    </div>
-                    <div class="resource-category">
-                        <div class="main-category">
-                            <span><%= resource.category %></span>
-                        </div>
-                        <div class="resource-sub-categories">
-                            <% resource.sub_category.forEach(function(subCat) { %>
-                                <span><%= subCat %></span>
-                            <% }) %>
-                        </div>
-                    </div>
-                </div>
-                <div class="resource-body">
-                    <div class="main-resource">
-                        <a target="_blank" href="<%= resource.main_url %>"><%= resource.main_url %></a>
-                    </div>
-                    <div class="other-resources">
-                        <% resource.urls.forEach(function(url) { %>
-                            <a target="_blank" href="<%= url %>"><%= url %></a>
-                        <% }) %>
-                    </div>
-                </div>
-
-            </div>
-        <% }) %>
+    <div class="spread-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% allResources.forEach(function(resource) { %>
+                    <tr>
+                        <td><a href="/company/resources/view/single/<%= resource.id %>"><%= resource.name %></a></td>
+                        <td><a target="_blank" href="<%= resource.main_url %>"><%= resource.main_url %></a></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
     </div>
-
+   
 
 </section>
 
