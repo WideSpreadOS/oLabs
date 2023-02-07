@@ -8,6 +8,7 @@
 body {
     background-color: #ececec;
     padding-top: 115px;
+    overscroll-behavior: none;
 }
 a {
     text-decoration: none;
