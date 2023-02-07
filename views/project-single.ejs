@@ -1,5 +1,46 @@
 <style>
+    .drag-container {
+        width: 90vw;
+        background-color: #bcbcbc;
+        margin-inline: auto;
+        padding: 2rem;
+        padding-top: 4rem;
+        margin-top: 2rem;
+        margin-bottom: 10rem;
+        border-radius: 1rem;
+    }
+    .draggable {
+        background-color: aqua;
+        margin-bottom: 2rem;
+        cursor: grab;
+        position: relative;
+        border-radius: 1rem;
+        padding: 1rem;
+        border: solid 2px transparent;
+    }
 
+    .dragging {
+        opacity: 0.5;
+    }
+    .draggable[data-complete="true"] {
+        border: solid 2px orangered;
+    }
+    .draggable[data-complete="true"]::after {
+        content: 'DONE';    
+        position: absolute;
+        top: -10px;
+        right: -20px;
+        width: 80px;
+        height: 20px;;
+        background-color: orangered;
+        font-weight: bold;
+        padding: 3px;
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+    }
 </style>
 
 
@@ -10,3 +51,87 @@
     <h6 style="text-align: center; margin-bottom: 50px; margin-top: 25px;">Project ID: <%= project.id %></h6>
 </div>
 
+<section>
+    <div class="section-header">
+        <h3>Task List</h3>
+    </div>
+
+    <div class="drag-container">
+        <div class="draggable" data-complete="false" draggable="true">
+            <h6>Task 1</h6>
+            <p>Title</p>
+            <p>Description of task</p>
+            <p>Created: 2/7/2023 at 2:50pm</p>
+        </div>
+        <div class="draggable" data-complete="false" draggable="true">
+            <h6>Task 2</h6>
+            <p>Title</p>
+            <p>Description of task</p>
+            <p>Created: 2/7/2023 at 2:55pm</p>
+        </div>
+        <div class="draggable" data-complete="true" draggable="true">
+            <h6>Task 3</h6>
+            <p>Title</p>
+            <p>Description of task</p>
+            <p>Created: 2/7/2023 at 3:00pm</p>
+        </div>
+        <div class="draggable" data-complete="false" draggable="true">
+            <h6>Task 4</h6>
+            <p>Title</p>
+            <p>Description of task</p>
+            <p>Created: 2/7/2023 at 3:02pm</p>
+        </div>
+
+
+
+
+    </div>
+
+</section>
+
+<script>
+    const
+        draggables = document.querySelectorAll('.draggable'),
+        dragContainer = document.querySelector('.drag-container')
+
+    draggables.forEach(draggable => {
+
+        draggable.addEventListener('dragstart', e => {
+            console.log(e)
+            draggable.classList.add('dragging')
+        })
+
+        draggable.addEventListener('dragend', e => {
+            console.log(e)
+            draggable.classList.remove('dragging')
+        })
+
+    })
+
+    dragContainer.addEventListener('dragover', e => {
+        e.preventDefault()
+        const afterElement = getDragAfterElement(dragContainer, e.clientY)
+        // console.log(afterElement)
+        const draggable = document.querySelector('.dragging')
+        if (afterElement == null) {
+            dragContainer.appendChild(draggable)
+        } else {
+            dragContainer.insertBefore(draggable, afterElement)
+        }
+    })
+
+    function getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect()
+            const offset = y - box.top - box.height / 2
+            // console.log(offset)
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child }
+            } else {
+                return closest
+            }
+
+        }, {offset: Number.NEGATIVE_INFINITY}).element
+    }
+</script>
