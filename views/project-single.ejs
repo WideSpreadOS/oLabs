@@ -10,7 +10,7 @@
         border-radius: 1rem;
     }
     .draggable {
-        background-color: aqua;
+        background-color: #efefef;
         margin-bottom: 2rem;
         cursor: grab;
         position: relative;
@@ -20,7 +20,7 @@
     }
 
     .dragging {
-        opacity: 0.5;
+        opacity: 0.25;
     }
     .draggable[data-complete="true"] {
         border: solid 2px orangered;
@@ -41,9 +41,38 @@
         justify-content: center;
         color: #fff;
     }
+    .toggle-complete {
+        position: absolute;
+        right: -10px;
+        bottom: -10px;
+        width: 40px;
+        height: 40px;
+        background-color: #3399cc;
+        padding: 0.5rem;
+        border-radius: 1rem;
+    }
+    .edit-button {
+        background-color: #9fe481;
+        text-align: center;
+        padding: 0.5rem;
+        border-radius: 1rem;
+        margin-top: 1rem;
+
+    }
+    .edit-button span {
+        pointer-events: none;
+        color: #fff;
+        font-weight: bold;
+    }
 </style>
 
-
+<div id="nav">
+    <a href="/" class="active-link">Home</a>
+    <a href="/company/projects">Projects</a>
+    <a href="/company/inventory">Inventory</a>
+    <a href="/company/resources">Resources</a>
+    <a href="/company/notes">Notes</a>
+</div>
 
 <div class="page-header">
     <h3>Project</h3>
@@ -52,35 +81,47 @@
 </div>
 
 <section>
+
+    <div class="create-task">
+        <h3>Add Task to Project</h3>
+        <form action="/company/projects/view/single/<%= project.id %>/tasks/add" method="post">
+            <input type="text" name="title" id="taskTitle" placeholder="Title">
+            <textarea name="description" id="taskDescription" placeholder="Description..."></textarea>
+            <button type="submit">Add</button>
+        </form>
+    </div>
+
     <div class="section-header">
         <h3>Task List</h3>
     </div>
 
     <div class="drag-container">
-        <div class="draggable" data-complete="false" draggable="true">
-            <h6>Task 1</h6>
-            <p>Title</p>
-            <p>Description of task</p>
-            <p>Created: 2/7/2023 at 2:50pm</p>
-        </div>
-        <div class="draggable" data-complete="false" draggable="true">
-            <h6>Task 2</h6>
-            <p>Title</p>
-            <p>Description of task</p>
-            <p>Created: 2/7/2023 at 2:55pm</p>
-        </div>
-        <div class="draggable" data-complete="true" draggable="true">
-            <h6>Task 3</h6>
-            <p>Title</p>
-            <p>Description of task</p>
-            <p>Created: 2/7/2023 at 3:00pm</p>
-        </div>
-        <div class="draggable" data-complete="false" draggable="true">
-            <h6>Task 4</h6>
-            <p>Title</p>
-            <p>Description of task</p>
-            <p>Created: 2/7/2023 at 3:02pm</p>
-        </div>
+        <% project.tasks.forEach(function(task) { %>
+            <% if (task.complete == true) { %>
+                <div class="draggable" data-complete="true" draggable="true">
+            <% } else { %>
+                <div class="draggable" data-complete="false" draggable="true">
+            <% } %>
+
+                <h6><%= task.title %></h6>
+                <p><%= task.description %></p>
+                <p>Created: <%= task.lifecycle.created.toDateString() %></p>
+                <div class="edit-button">
+                    <span>Edit</span>
+                </div>
+
+                <div class="edit-form hidden">
+                    <form action="/company/projects/view/single/<%= project.id %>/tasks/edit/<%= task.id %>?_method=PATCH" method="post">
+                        <input type="text" name="title" id="taskTitle" placeholder="Title" value="<%= task.title %>">
+                        <textarea name="description" id="taskDescription" placeholder="Description..."><%= task.description %></textarea>
+                        <button type="submit">Update</button>
+                    </form>
+                </div>
+
+            </div>
+
+        <% }) %>
+
 
 
 
@@ -88,6 +129,11 @@
     </div>
 
 </section>
+
+
+<div class="logo-container">
+    <img src="/images/system/olabs_logo_1a1a1a.png" alt="oLabs Logo">
+</div>
 
 <script>
     const
@@ -104,6 +150,21 @@
         draggable.addEventListener('dragend', e => {
             console.log(e)
             draggable.classList.remove('dragging')
+        })
+        
+        const 
+            editBtn = draggable.querySelector('.edit-button'),
+            editForm = draggable.querySelector('.edit-form')
+        
+        editBtn.addEventListener('click', e => {
+            editForm.classList.toggle('hidden')
+            if (editForm.classList.contains('hidden')) {
+                editBtn.querySelector('span').innerText = 'Edit'
+                e.target.style.backgroundColor = '#9fe481'
+            } else {
+                editBtn.querySelector('span').innerText = 'Cancel'
+                e.target.style.backgroundColor = 'orangered'
+            }
         })
 
     })

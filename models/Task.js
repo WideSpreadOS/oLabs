@@ -3,7 +3,10 @@ const mongoose = require('mongoose');
 const TaskSchema = new mongoose.Schema({
     title: String,
     description: String,
-    complete: Boolean,
+    complete: {
+        type: Boolean,
+        default: false
+    },
     directions: [String],
     tools: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
     materials: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],

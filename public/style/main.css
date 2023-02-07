@@ -103,6 +103,49 @@ h3 {
     background-color: #faafa5;
 }
 
+
+
+/* FORMS */
+form {
+    background-color: #bababa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    width: 300px;
+    max-width: 90%;
+    margin-inline: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+}
+
+input, textarea {
+    outline: none;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    width: 100%;
+}
+textarea {
+    min-height: 125px;
+    resize: none;
+    overflow-y: auto;
+}
+
+button {
+    padding: 1rem;
+    background-color: #3399cc;
+    border-radius: 1rem;
+    color: #fff;
+    border: none;
+    outline: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
 .spread-table {
     width: 95%;
     max-width: 95vw;

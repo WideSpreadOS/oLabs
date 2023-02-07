@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const ejs = require('ejs')
 const bodyParser = require('body-parser')
 const expressLayouts = require('express-ejs-layouts')
+const methodOverride = require('method-override')
 
 const app = express()
 
@@ -21,7 +22,8 @@ const Project = require('./models/Project.js')
 
 // Middleware
 app.use(bodyParser.json());
-
+app.use(methodOverride('_method'));
+const path = require('path')
 // Static
 app.use(express.static('public'));
 
@@ -89,13 +91,33 @@ app.get('/company/projects', async (req, res) => {
 
 app.get('/company/projects/view/single/:projectId', async (req, res) => {
     const id = req.params.projectId
-    const project = await Project.findById(id)
-
+    const project = await Project.findById(id).populate('tasks').exec()
+    console.log(project)
     res.render('project-single', { project })
 })
 
+app.post('/company/projects/view/single/:projectId/tasks/add', async (req, res) => {
+    const projectId = req.params.projectId
+    const data = req.body
+
+    const newTask = new Task(data)
+    newTask.save()
 
 
+    console.log(newTask.id)
+    const taskId = newTask.id
+    await Project.findByIdAndUpdate(projectId, {
+        $addToSet: { tasks: newTask.id }
+    })
+    res.redirect(`/company/projects/view/single/${projectId}`)
+})
+app.patch('/company/projects/view/single/:projectId/tasks/edit/:taskId', async (req, res) => {
+    const taskId = req.params.taskId
+    const projectId = req.params.projectId
+    const data = req.body
+    await Task.findByIdAndUpdate(taskId, data)
+    res.redirect(`/company/projects/view/single/${projectId}`)
+})
 app.get('/company/inventory', async (req, res) => {
     const allItems = await Item.find()
 

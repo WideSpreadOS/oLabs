@@ -16,6 +16,7 @@ const ProjectSchema = new mongoose.Schema({
             default: Date.now()
         }
     }],
+    tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task' }],
     code: [String],
     category: String,
     sub_category: [String],
