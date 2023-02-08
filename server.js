@@ -92,7 +92,11 @@ app.get('/company/projects', async (req, res) => {
 app.get('/company/projects/view/single/:projectId', async (req, res) => {
     const id = req.params.projectId
     const project = await Project.findById(id).populate('tasks').exec()
+    console.log('\n\n\n\n--------------\n--------------\n\n\nfile: server.js\nline: 95\n')
+    console.log('project:\n\n')
     console.log(project)
+    console.log('Total Tasks: ', project.tasks.length)
+    console.log('\n\nEnd of project\n\n----------------------------------\n----------------------------------\n\n\n')
     res.render('project-single', { project })
 })
 
@@ -116,6 +120,15 @@ app.patch('/company/projects/view/single/:projectId/tasks/edit/:taskId', async (
     const projectId = req.params.projectId
     const data = req.body
     await Task.findByIdAndUpdate(taskId, data)
+    res.redirect(`/company/projects/view/single/${projectId}`)
+})
+
+app.post('/company/projects/view/single/:projectId/tasks/:taskId/delete', async (req, res) => {
+    const taskId = req.params.taskId
+    const projectId = req.params.projectId
+    
+    await Task.findByIdAndDelete(taskId)
+
     res.redirect(`/company/projects/view/single/${projectId}`)
 })
 app.get('/company/inventory', async (req, res) => {

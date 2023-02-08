@@ -1,16 +1,24 @@
 <style>
     .drag-container {
-        width: 90vw;
-        background-color: #bcbcbc;
+        width: 82vw;
+        background-color: #bcbcbc41;
         margin-inline: auto;
         padding: 2rem;
         padding-top: 4rem;
         margin-top: 2rem;
         margin-bottom: 10rem;
         border-radius: 1rem;
+        backdrop-filter: blur(2px);
+        border: solid 2px #fff;
+        box-shadow: 0 30px 50px #00000071, inset 0 0 50px #3399cc38;
+            padding: 1rem;
+    padding-top: 2rem;
+
     }
     .draggable {
         background-color: #efefef;
+        background-color: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(4px);
         margin-bottom: 2rem;
         cursor: grab;
         position: relative;
@@ -64,11 +72,16 @@
         color: #fff;
         font-weight: bold;
     }
+
+    .create-task h6 {
+        font-size: 1.8rem;
+        color: #3399cc;
+    }
 </style>
 
 <div id="nav">
-    <a href="/" class="active-link">Home</a>
-    <a href="/company/projects">Projects</a>
+    <a href="/">Home</a>
+    <a href="/company/projects" class="active-link">Projects</a>
     <a href="/company/inventory">Inventory</a>
     <a href="/company/resources">Resources</a>
     <a href="/company/notes">Notes</a>
@@ -83,8 +96,8 @@
 <section>
 
     <div class="create-task">
-        <h3>Add Task to Project</h3>
         <form action="/company/projects/view/single/<%= project.id %>/tasks/add" method="post">
+            <h6>Create Task</h6>
             <input type="text" name="title" id="taskTitle" placeholder="Title">
             <textarea name="description" id="taskDescription" placeholder="Description..."></textarea>
             <button type="submit">Add</button>
@@ -115,6 +128,10 @@
                         <input type="text" name="title" id="taskTitle" placeholder="Title" value="<%= task.title %>">
                         <textarea name="description" id="taskDescription" placeholder="Description..."><%= task.description %></textarea>
                         <button type="submit">Update</button>
+                    </form>
+
+                    <form action="/company/projects/view/single/<%=project.id %>/tasks/<%= task.id %>/delete" method="post">
+                        <button class="delete-button" type="submit">Delete</button>
                     </form>
                 </div>
 
