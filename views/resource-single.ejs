@@ -3,11 +3,74 @@
 </style>
 
 
-
-<div class="page-header">
-    <h3>Resource</h3>
-    <h1><%= resource.name %></h1>
-    <h6 style="text-align: center; margin-bottom: 50px; margin-top: 25px;">Resource ID: <%= resource.id %></h6>
-    <a style="text-align: center; color: #faafa5; text-decoration: none; padding: 15px;" target="_blank" href="<%= resource.main_url %>"><%= resource.main_url %></a>
+<div id="nav">
+    <a href="/">Home</a>
+    <a href="/company/projects">Projects</a>
+    <a href="/company/inventory">Inventory</a>
+    <a href="/company/resources" class="active-link">Resources</a>
+    <a href="/company/notes">Notes</a>
 </div>
 
+<div class="logo-container"
+    style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);z-index: -100;">
+    <img style="scale: 0.5;" src="/images/system/olabs_logo_1a1a1a.png" alt="oLabs Logo">
+</div>
+
+
+
+
+<div class="page-header">
+    <h1><%= resource.name %></h1>
+    <h6 style="text-align: center; margin-bottom: 50px; margin-top: 25px;">Resource ID: <%= resource.id %></h6>
+    <p class="main-url">Main URL: <a target="_blank" href="<%= resource.main_url %>"><%= resource.main_url %></a></p>
+</div>
+
+<% if (resource.urls.length <= 0) { %>
+    <p>No links added yet.</p>
+<% } else { %>
+<div class="page-section">
+    <div class="link-tree">
+        <h5>Documentation</h5>
+        <% resource.urls.forEach(function(link) { %>
+            <% if (link.target_type == 'documentation') { %>
+                <div class="link-tree-item documentation-item">
+                <div class="link-tree-item-title"><%= link.title %> <%= link.target_type %></div>
+                <div class="link-tree-item-link">
+                    <a href="<%= link.target %>" target="_blank"><%= link.target %></a>
+                </div>
+                </div>
+            <% } %>
+            <% if (link.target_type == 'example') { %>
+                <div class="link-tree-item example-item">
+                <div class="link-tree-item-title"><%= link.title %> <%= link.target_type %></div>
+                <div class="link-tree-item-link">
+                    <a href="<%= link.target %>" target="_blank"><%= link.target %></a>
+                </div>
+                </div>
+            <% } %>
+        <% }) %>
+
+    </div>
+<% } %>
+
+</div>
+
+
+<form action="/company/resources/view/single/<%= resource.id %>/edit?_method=PATCH" method="post">
+    <h5>Add New URL</h5>
+    <div class="input-group">
+        <input type="text" name="title" placeholder="Title">
+        <input type="url" name="target" placeholder="URL">
+        <select name="target_type">
+            <option selected hidden disabled>URL Type</option>
+            <option value="documentation">Documentation</option>
+            <option value="blog">Blog</option>
+            <option value="photo">Photo</option>
+            <option value="video">Video</option>
+            <option value="audio">Audio</option>
+            <option value="example">Example</option>
+            <option value="other">Other</option>
+        </select>
+        <button type="submit">Add</button>
+    </div>
+</form>

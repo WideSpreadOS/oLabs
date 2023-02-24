@@ -58,6 +58,20 @@ app.get('/company/resources/view/single/:resourceId', async (req, res) => {
 
     res.render('resource-single', {resource})
 })
+
+app.patch('/company/resources/view/single/:id/edit', async (req, res) => {
+    const id = req.params.id
+    const linkData = req.body
+    console.log('linkData:\n\n')
+    console.log(linkData)
+    const resource = await Resource.findById(id)
+    console.log('resource:\n\n')
+
+    resource.urls.push(linkData)
+    resource.save()
+    console.log(resource)
+    res.redirect(`/company/resources/view/single/${id}`)
+})
 app.post('/resource/add', async (req, res) => {
     const data = req.body
     console.log(data)
@@ -122,8 +136,7 @@ app.patch('/company/projects/view/single/:projectId/tasks/edit/:taskId', async (
     await Task.findByIdAndUpdate(taskId, data)
     res.redirect(`/company/projects/view/single/${projectId}`)
 })
-
-app.post('/company/projects/view/single/:projectId/tasks/:taskId/delete', async (req, res) => {
+app.get('/company/projects/view/single/:projectId/tasks/:taskId/delete', async (req, res) => {
     const taskId = req.params.taskId
     const projectId = req.params.projectId
     
