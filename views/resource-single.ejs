@@ -21,30 +21,77 @@
 
 <div class="page-header">
     <h1><%= resource.name %></h1>
-    <h6 style="text-align: center; margin-bottom: 50px; margin-top: 25px;">Resource ID: <%= resource.id %></h6>
     <p class="main-url">Main URL: <a target="_blank" href="<%= resource.main_url %>"><%= resource.main_url %></a></p>
+
+
+    <div class="page-header-more">
+        <h4 style="text-align: center; font-size: 1.25rem; margin-top: 40px;">Filter Resources</h4>
+        <div class="filter-options">
+            <div data-filter="all" style="border: solid 2px rgba(0, 0, 0, 1);">Show All</div>
+            <div data-filter="example" style="border: solid 2px rgba(201, 79, 86, 1);">Examples</div>
+            <div data-filter="documentation" style="border: solid 2px rgba(239, 50, 254, 1);">Documentation</div>
+            <div data-filter="blog" style="border: solid 2px rgba(169, 0, 255, 1);">Blog</div>
+            <div data-filter="media" style="border: solid 2px rgba(59, 204, 198, 1);">Media</div>
+            <div data-filter="other" style="border: solid 2px rgba(200, 244, 92, 1);">Other</div>
+        </div>
+
+    </div>
+
+
+
 </div>
 
+
+
+
+
 <% if (resource.urls.length <= 0) { %>
-    <p>No links added yet.</p>
+    <p style="text-align: center; font-size: 1.25rem;">No links added yet.</p>
 <% } else { %>
 <div class="page-section">
     <div class="link-tree">
+    <span id="totalItems" style="margin-inline: auto;">Total Items: </span>
+
         <h5>Documentation</h5>
         <% resource.urls.forEach(function(link) { %>
             <% if (link.target_type == 'documentation') { %>
                 <div class="link-tree-item documentation-item">
-                <div class="link-tree-item-title"><%= link.title %> <%= link.target_type %></div>
+                <div class="link-tree-item-title"><%= link.title %></div>
                 <div class="link-tree-item-link">
-                    <a href="<%= link.target %>" target="_blank"><%= link.target %></a>
+                    <a class="link" href="<%= link.target %>" target="_blank"><%= link.target %></a>
                 </div>
                 </div>
             <% } %>
             <% if (link.target_type == 'example') { %>
                 <div class="link-tree-item example-item">
-                <div class="link-tree-item-title"><%= link.title %> <%= link.target_type %></div>
+                <div class="link-tree-item-title"><%= link.title %></div>
                 <div class="link-tree-item-link">
-                    <a href="<%= link.target %>" target="_blank"><%= link.target %></a>
+                    <a class="link" href="<%= link.target %>" target="_blank"><%= link.target %></a>
+                </div>
+                </div>
+            <% } %>
+            <% if (link.target_type == 'blog') { %>
+                <div class="link-tree-item blog-item">
+                <div class="link-tree-item-title"><%= link.title %></div>
+                <div class="link-tree-item-link">
+                    <a class="link" href="<%= link.target %>" target="_blank"><%= link.target %></a>
+                </div>
+                </div>
+            <% } %>
+            <% if (link.target_type == 'other') { %>
+                <div class="link-tree-item other-item">
+                <div class="link-tree-item-title"><%= link.title %></div>
+                <div class="link-tree-item-link">
+                    <a class="link" href="<%= link.target %>" target="_blank"><%= link.target %></a>
+                </div>
+                </div>
+            <% } %>
+            <% if (link.target_type == 'photo') { %>
+                <div class="link-tree-item media-item">
+                <div class="link-tree-item-title"><%= link.title %></div>
+                <div class="link-tree-image-preview"><img src="<%= link.target %>" alt="<%= link.title %>"></div>
+                <div class="link-tree-item-link">
+                    <a class="link" href="<%= link.target %>" target="_blank"><%= link.target %></a>
                 </div>
                 </div>
             <% } %>
@@ -52,7 +99,6 @@
 
     </div>
 <% } %>
-
 </div>
 
 
@@ -74,3 +120,59 @@
         <button type="submit">Add</button>
     </div>
 </form>
+
+
+<script>
+    const
+        allLinks = document.querySelectorAll('.link'),
+        allLinkTreeItems = document.querySelectorAll('.link-tree-item'),
+        filterOptions = document.querySelectorAll('.filter-options div'),
+        filterAll = document.querySelector('#filterAll'),
+        filterExamples = document.querySelector('#filterExamples'),
+        filterDocs = document.querySelector('#filterDocs'),
+        filterBlogs = document.querySelector('#filterBlogs'),
+        filterMedia = document.querySelector('#filterMedia'),
+        filterOther = document.querySelector('#filterOther'),
+        totalItems = document.querySelector('#totalItems')
+
+
+    if (allLinkTreeItems.length <= 0) {
+        totalItems.innerHTML = `Total Items: None`
+    } else {
+        totalItems.innerHTML = `Total Items: ${allLinkTreeItems.length}`
+    }
+    allLinks.forEach(link => {
+        console.log(link)
+        const linkEl = document.createElement('img')
+        linkEl.setAttribute('src', '/images/system/link.png')
+        linkEl.classList.add('link-icon')
+        link.appendChild(linkEl)
+    })
+
+    filterOptions.forEach(filter => {
+        filter.addEventListener('click', e => {
+            console.log('CLICKED')
+            const
+            selectedFilter = filter.getAttribute('data-filter'),
+            selectedFilterClass = `${selectedFilter}-item`
+            
+            allLinkTreeItems.forEach(item => {
+                item.classList.remove('refiltered-item')
+                item.classList.add('hidden')
+                if (item.classList.contains(selectedFilterClass)) {
+                    item.classList.add('refiltered-item')
+                    item.classList.remove('hidden')
+                    console.log(item)
+                }
+                if (selectedFilter == 'all') {
+                    item.classList.remove('refiltered-item')
+                    item.classList.remove('hidden')
+                }
+            })
+
+            
+            
+        })
+    })
+    
+</script>
