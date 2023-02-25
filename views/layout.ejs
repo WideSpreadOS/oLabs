@@ -134,5 +134,27 @@
         })
 
     </script>
+    <script>
+        const
+            TogetherJSConfig_siteName = "SocialSpread",
+            TogetherJSConfig_toolName = "Collaboration"
+
+
+    </script>
+    <script src="https://togetherjs.com/togetherjs-min.js"></script>
+    
+    <script>
+        const
+            openSS = document.getElementById('openSS'),
+            hideLogo = document.getElementById('hideLogo'),
+            logoEl = document.querySelector('.logo-container')
+
+        openSS.addEventListener('click', e => {
+            TogetherJS()
+        })
+        hideLogo.addEventListener('click', e => {
+            logoEl.style.display = 'none'
+        })
+    </script>
 </body>
 </html>

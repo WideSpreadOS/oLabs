@@ -768,7 +768,15 @@ select {
     box-shadow: 0 10px 15px #0000008f;
 }
 
-
+#togetherjs-walkthrough {
+    background-color: red;
+    max-height: 50vh;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.togetherjs-mobile-browser .togetherjs .togetherjs-window {
+    height: 40%;
+}
 @media screen and (min-width: 800px) {
     body {
     }
