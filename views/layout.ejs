@@ -16,8 +16,8 @@
     </div>
 
     <div id="addNoteEl" class="hidden">
-        <div id="closeAddNoteBtn">Close</div>
-        <h4>Add Note</h4>
+        <div id="closeAddNoteBtn">Cancel</div>
+        <h4 style="margin-top: 50px;">Add Note</h4>
         <form action="/note/add" method="post">
             <input type="text" name="title" id="addNoteTitle" placeholder="Title">
             <textarea name="body" id="addNoteContent" placeholder="Write a note..."></textarea>
@@ -28,6 +28,7 @@
                 <option value="design">Design</option>
                 <option value="other">Other</option>
             </select>
+            <h6>Main Tags</h6>
             <div class="sub-categories">
                 <div class="sub-category-item">
                     <label for="databaseChkNote">Database</label>
@@ -44,11 +45,17 @@
 
 
             </div>
+            <h6>Custom Tags</h6>
+            <div class="custom-categories">
+                <div class="category-input-group">
+                    <input type="text" name="tags" placeholder="#">
+                </div>
+            </div>
             <button type="submit">Add</button>
         </form>
     </div>
     <div id="addResourceEl" class="hidden">
-        <div id="closeAddResourceBtn">Close</div>
+        <div id="closeAddResourceBtn">Cancel</div>
         <h4>Add Resource</h4>
         <form action="/resource/add" method="post">
             <input type="text" name="name" id="addFormName" placeholder="Name">
@@ -79,7 +86,10 @@
             <button type="submit">Add</button>
         </form>
     </div>
-    <%- body %>
+
+    <div id="oLabsBody">
+        <%- body %>
+    </div>
 
     <script>
         const
@@ -91,7 +101,8 @@
             closeAddNoteBtn = document.getElementById('closeAddNoteBtn'),
             closeAddResourceBtn = document.getElementById('closeAddResourceBtn'),
             addNoteEl = document.getElementById('addNoteEl'),
-            addResourceEl = document.getElementById('addResourceEl')
+            addResourceEl = document.getElementById('addResourceEl'),
+            oLabsBody = document.getElementById('oLabsBody')
 
         quickMenuOpen.addEventListener('click', e => {
             quickMenu.classList.toggle('hidden')
@@ -105,17 +116,21 @@
             quickMenu.classList.toggle('hidden')
             quickMenuOpen.classList.toggle('hidden')
             addNoteEl.classList.toggle('hidden')
+            oLabsBody.classList.toggle('hidden')
         })
         closeAddNoteBtn.addEventListener('click', e => {
             addNoteEl.classList.toggle('hidden')
+            oLabsBody.classList.toggle('hidden')
         })
         addResourceBtn.addEventListener('click', e => {
             quickMenu.classList.toggle('hidden')
             quickMenuOpen.classList.toggle('hidden')
             addResourceEl.classList.toggle('hidden')
+            oLabsBody.classList.toggle('hidden')
         })
         closeAddResourceBtn.addEventListener('click', e => {
             addResourceEl.classList.toggle('hidden')
+            oLabsBody.classList.toggle('hidden')
         })
 
     </script>

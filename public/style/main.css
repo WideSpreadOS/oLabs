@@ -8,7 +8,7 @@
 body {
     background-color: #ececec;
     padding-top: 115px;
-    padding-bottom: 50vh;
+    padding-bottom: 75vh;
     overscroll-behavior: none;
 }
 a {
@@ -27,8 +27,8 @@ h3 {
 #quickMenuOpen, #quickMenu {
     position: fixed;
     left: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 15%;
+    
     z-index: 99500;
 }
 #quickMenuOpen {
@@ -51,6 +51,7 @@ h3 {
     line-height: 30px;
 }
 #quickMenu {
+    transform: translateY(30%);
     background-color: #3399cc;
     background-color: #3399cc6b;
     backdrop-filter: blur(8px);
@@ -90,28 +91,24 @@ h3 {
 }
 
 #addNoteEl, #addResourceEl {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     background-color: #ececec;
     z-index: 99950;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     padding-top: 5vh;
     text-align: center;
 }
 #addNoteEl form, #addResourceEl form {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+
     border-radius: 1rem;
     padding: 8px;
     z-index: 99999;
     width: 80vw;
-    height: 60vh;
+    min-height: 60vh;
+    overflow-y: auto;
 
 }
 #addNoteEl form {
@@ -263,13 +260,12 @@ select {
 .logo-container img {
     max-width: 80vw;
     max-height: 50vh;
-
+    transform: scale(0.5);
 }
 .page-header {
     margin-top: 50px;
     padding: 1rem;
     border-radius: 1rem;
-    padding-top: 2rem;
     background-color: #bababa48;
     border: solid 2px #ffffff83;
     box-shadow: 0 30px 50px #00000071, inset 0 0 50px #3399cc38;
@@ -433,7 +429,7 @@ select {
     align-items: center;
     justify-content: space-evenly;
     gap: 0.5rem;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 .filter-options div {
     border-radius: 1rem;
@@ -527,6 +523,17 @@ select {
     padding: 4px;
     margin-bottom: 4px;
     text-shadow: 0 0 2px #fff;
+}
+
+.sub-categories {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.custom-categories {
+    padding: 0.5rem;
 }
 .note-sub-categories {
     color: #333;
