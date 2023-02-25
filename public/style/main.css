@@ -130,7 +130,7 @@ form {
     padding-top: 2rem;
     background-color: #bababa48;
     border: solid 2px #ffffff83;
-    box-shadow: 0 30px 50px #00000071, inset 0 0 50px #3399cc38;
+    box-shadow: 0 30px 25px #00000071, inset 0 0 50px #3399cc38;
     width: 300px;
     max-width: 90%;
     margin-inline: auto;
@@ -193,8 +193,10 @@ select {
     max-width: 95vw;
     margin-inline: auto;
     overflow-x: auto;
-    background-color: #ececec;
+    background-color: #ecececa6;
+    box-shadow: 0 30px 25px #00000071, inset 0 0 50px #3399cc38;
     border-radius: 1rem;
+    backdrop-filter: blur(4px);
 
 }
 .spread-table table {
@@ -261,6 +263,7 @@ select {
     max-width: 80vw;
     max-height: 50vh;
     transform: scale(0.5);
+    filter: drop-shadow(2px 4px 6px #000);
 }
 .page-header {
     margin-top: 50px;
@@ -268,7 +271,7 @@ select {
     border-radius: 1rem;
     background-color: #bababa48;
     border: solid 2px #ffffff83;
-    box-shadow: 0 30px 50px #00000071, inset 0 0 50px #3399cc38;
+    box-shadow: 0 30px 25px #00000071, inset 0 0 50px #3399cc38;
     margin-bottom: 3rem;
     width: 90%;
     backdrop-filter: blur(6px);
@@ -304,7 +307,7 @@ select {
     border-radius: 1rem;
     background-color: #bababa48;
     border: solid 2px #ffffff83;
-    box-shadow: 0 30px 50px #00000071, inset 0 0 50px #3399cc38;
+    box-shadow: 0 30px 25px #00000071, inset 0 0 50px #3399cc38;
     margin-bottom: 3rem;
     width: 90%;
     backdrop-filter: blur(6px);
@@ -322,7 +325,7 @@ select {
         border-radius: 1rem;
         background-color: #3e8ecf86;
         border: solid 2px #ffffff83;
-        box-shadow: 0 30px 50px #00000071, inset 0 0 50px #3399cc38;
+        box-shadow: 0 30px 25px #00000071, inset 0 0 50px #3399cc38;
         margin-bottom: 5rem;
         backdrop-filter: blur(6px);
         max-width: 95%;
@@ -573,6 +576,7 @@ select {
 
 .note-container {
     background-color: #f6e78586;
+    box-shadow: 0 30px 25px #00000071, inset 0 0 50px #3399cc38;
     min-height: 200px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -593,6 +597,7 @@ select {
 
 .note {
     background-color: #f6e785;
+    background-color: #f6e785cf;
     border-radius: 1rem;
     min-height: 200px;
     width: 300px;
@@ -636,6 +641,7 @@ select {
 
 .item-container {
     background-color: #9fe48186;
+    box-shadow: 0 30px 25px #00000071, inset 0 0 50px #3399cc38;
     min-height: 200px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -685,6 +691,7 @@ select {
 
 .project-container {
     background-color: #67cfdd86;
+    box-shadow: 0 30px 25px #00000071, inset 0 0 50px #3399cc38;
     min-height: 200px;
     padding-top: 30px;
     padding-bottom: 30px;

@@ -48,10 +48,15 @@ app.post('/item/add', async (req, res) => {
     console.log(data)
     const newItem = new Item(data)
     newItem.save()
-    res.redirect('/')
+    res.redirect('/company/inventory')
 })
 
+app.get('/company/inventory/item/view/:id', async (req, res) => {
+    const id = req.params.id
+    const item = await Item.findById(id)
+    res.render('item-single', { item })
 
+})
 app.get('/company/resources/view/single/:resourceId', async (req, res) => {
     const id = req.params.resourceId
     const resource = await Resource.findById(id)
