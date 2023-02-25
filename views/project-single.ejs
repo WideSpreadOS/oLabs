@@ -25,8 +25,23 @@
         border-radius: 1rem;
         padding: 1rem;
         border: solid 2px transparent;
-    }
 
+    }
+    .draggable h6 {
+        padding: 0.25rem;
+        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        border-bottom: solid 1px #ccc;
+    }
+    .note-created {
+        font-size: 0.75rem;
+        color: #aaa;
+        text-shadow: 0 1px 1px #00000088;
+        margin-top: 10px;
+        text-align: right;
+        margin-bottom: 2rem;
+    }
     .dragging {
         opacity: 0.25;
     }
@@ -117,7 +132,7 @@
 
                 <h6><%= task.title %></h6>
                 <p><%= task.description %></p>
-                <p>Created: <%= task.lifecycle.created.toDateString() %></p>
+                <p class="note-created">Created: <%= task.lifecycle.created.toDateString() %></p>
                 <div class="edit-button">
                     <span>Edit</span>
                 </div>
