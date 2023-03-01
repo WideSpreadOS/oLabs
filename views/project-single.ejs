@@ -311,7 +311,7 @@
                 body: JSON.stringify(update),
             }
 
-            const url = 'http://localhost:5000/company/projects/view/single/' + projectId + '/tasks/status/' + taskId
+            const url = 'http://www.olabs.herokuapp.com/company/projects/view/single/' + projectId + '/tasks/status/' + taskId
             console.log('url: ', url)
             fetch(url, options)
                 .then(data => {
@@ -342,7 +342,7 @@
                 body: JSON.stringify(update),
             }
 
-            const url = 'http://localhost:5000/company/projects/view/single/' + projectId + '/tasks/status/' + taskId
+            const url = 'http://www.olabs.herokuapp.com/company/projects/view/single/' + projectId + '/tasks/status/' + taskId
             console.log('url: ', url)
             fetch(url, options)
                 .then(data => {
@@ -362,8 +362,8 @@
         deleteBtn.addEventListener('click', e => {
             draggable.classList.add('hidden')
             const
-                url = '/company/projects/view/single/' + projectId + '/tasks/' + taskId + '/delete'
-
+                url = 'http://www.olabs.herokuapp.com/company/projects/view/single/' + projectId + '/tasks/' + taskId + '/delete'
+            
             fetch(url, {
                 method: 'DELETE'
             }).then(response => {
