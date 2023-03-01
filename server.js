@@ -40,12 +40,10 @@ app.get('/', async (req, res) => {
     const allItems = await Item.find()
     const allProjects = await Project.find()
     res.render('landing', {allResources, allNotes, allItems, allProjects})
-
 })
 
 app.post('/item/add', async (req, res) => {
     const data = req.body
-    console.log(data)
     const newItem = new Item(data)
     newItem.save()
     res.redirect('/company/inventory')
@@ -55,83 +53,73 @@ app.get('/company/inventory/item/view/:id', async (req, res) => {
     const id = req.params.id
     const item = await Item.findById(id)
     res.render('item-single', { item })
-
 })
 app.get('/company/resources/view/single/:resourceId', async (req, res) => {
     const id = req.params.resourceId
     const resource = await Resource.findById(id)
-
     res.render('resource-single', {resource})
 })
 
 app.patch('/company/resources/view/single/:id/edit', async (req, res) => {
     const id = req.params.id
     const linkData = req.body
-    console.log('linkData:\n\n')
-    console.log(linkData)
     const resource = await Resource.findById(id)
-    console.log('resource:\n\n')
-
     resource.urls.push(linkData)
     resource.save()
-    console.log(resource)
     res.redirect(`/company/resources/view/single/${id}`)
 })
 app.post('/resource/add', async (req, res) => {
     const data = req.body
-    console.log(data)
     const newResource = new Resource(data)
     newResource.save()
-    res.redirect('/')
+    res.redirect('/company/resources')
 })
 
 app.post('/note/add', async (req, res) => {
     const data = req.body
-    console.log(data)
     const newNote = new Note(data)
     newNote.save()
-    res.redirect('/')
+    res.redirect('/company/notes')
 })
 
 app.post('/project/add', async (req, res) => {
     const data = req.body
-    console.log(data)
     const newProject = new Project(data)
     newProject.save()
-    res.redirect('/')
+    res.redirect('/company/projects')
 })
 
 app.get('/company/projects', async (req, res) => {
     const allProjects = await Project.find()
-
     res.render('projects', {allProjects})
-
 })
 
 app.get('/company/projects/view/single/:projectId', async (req, res) => {
     const id = req.params.projectId
     const project = await Project.findById(id).populate('tasks').exec()
-    console.log('\n\n\n\n--------------\n--------------\n\n\nfile: server.js\nline: 95\n')
-    console.log('project:\n\n')
-    console.log(project)
-    console.log('Total Tasks: ', project.tasks.length)
-    console.log('\n\nEnd of project\n\n----------------------------------\n----------------------------------\n\n\n')
     res.render('project-single', { project })
 })
 
 app.post('/company/projects/view/single/:projectId/tasks/add', async (req, res) => {
     const projectId = req.params.projectId
     const data = req.body
-
     const newTask = new Task(data)
     newTask.save()
-
-
-    console.log(newTask.id)
     const taskId = newTask.id
     await Project.findByIdAndUpdate(projectId, {
         $addToSet: { tasks: newTask.id }
     })
+    res.redirect(`/company/projects/view/single/${projectId}`)
+})
+app.patch('/company/projects/view/single/:projectId/tasks/status/:taskId', async (req, res) => {
+    const
+        projectId = req.params.projectId,
+        taskId = req.params.taskId,
+        data = req.body
+
+    console.log(data)
+
+    await Task.findByIdAndUpdate(taskId, data)
     res.redirect(`/company/projects/view/single/${projectId}`)
 })
 app.patch('/company/projects/view/single/:projectId/tasks/edit/:taskId', async (req, res) => {
@@ -141,31 +129,23 @@ app.patch('/company/projects/view/single/:projectId/tasks/edit/:taskId', async (
     await Task.findByIdAndUpdate(taskId, data)
     res.redirect(`/company/projects/view/single/${projectId}`)
 })
-app.get('/company/projects/view/single/:projectId/tasks/:taskId/delete', async (req, res) => {
+app.delete('/company/projects/view/single/:projectId/tasks/:taskId/delete', async (req, res) => {
     const taskId = req.params.taskId
     const projectId = req.params.projectId
-    
     await Task.findByIdAndDelete(taskId)
-
     res.redirect(`/company/projects/view/single/${projectId}`)
 })
 app.get('/company/inventory', async (req, res) => {
     const allItems = await Item.find()
-
     res.render('inventory', {allItems})
-
 })
 app.get('/company/resources', async (req, res) => {
     const allResources = await Resource.find()
-
     res.render('resources', {allResources})
-
 })
 app.get('/company/notes', async (req, res) => {
     const allNotes = await Note.find()
-
     res.render('notes', {allNotes})
-
 })
 
 app.listen(port, (console.log(`http://localhost:${port}`)))

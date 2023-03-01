@@ -16,6 +16,7 @@
 </div>
 
 
+
 <div class="page-header">
     <h1>Resources</h1>
 </div>
@@ -26,25 +27,29 @@
         <h3>Current</h3>
     </div>
 
-    <div class="spread-table">
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>URL</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% allResources.forEach(function(resource) { %>
-                    <tr>
-                        <td><a href="/company/resources/view/single/<%= resource.id %>"><%= resource.name %></a></td>
-                        <td><a target="_blank" href="<%= resource.main_url %>"><%= resource.main_url %></a></td>
-                    </tr>
-                <% }) %>
-            </tbody>
-        </table>
+
+    <div class="resources-container">
+        <div class="resource-item">
+            <div class="resource-title">
+                <span style="font-weight: bold; color: #fff;">Notes</span>
+            </div>
+            <div class="resource-link">
+                <span style="font-weight: bold; color: #fff;">URL</span>
+            </div>
+        </div>
+        <% allResources.forEach(function(resource) { %>
+            <div class="resource-item">
+                <div class="resource-title">
+                    <a href="/company/resources/view/single/<%= resource.id %>"><%= resource.name %></a>
+                </div>
+                <div class="resource-link">
+                    <a target="_blank" href="<%= resource.main_url %>"><%= resource.main_url %></a>
+                </div>
+            </div>
+        <% }) %>
     </div>
-   
+
+
 
 </section>
 

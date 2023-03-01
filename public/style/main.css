@@ -174,7 +174,9 @@ select {
     border: none;
     outline: none;
 }
-
+input[type="checkbox"] {
+    accent-color: #3e8ecf86;
+}
 .input-group {
     display: flex;
     flex-direction: column;
@@ -321,15 +323,16 @@ select {
 }
 .section-header {
     margin-top: 5rem;
-        padding: 1rem;
-        border-radius: 1rem;
-        background-color: #3e8ecf86;
-        border: solid 2px #ffffff83;
-        box-shadow: 0 30px 25px #00000071, inset 0 0 50px #3399cc38;
-        margin-bottom: 5rem;
-        backdrop-filter: blur(6px);
-        max-width: 95%;
-        margin-inline: auto;
+    padding: 1rem;
+    background-color: #3e8ecf86;
+    border-top: solid 2px #ffffff83;
+    box-shadow: 0 30px 25px #00000071, inset 0 0 50px #3399cc38;
+    margin-bottom: 5rem;
+    backdrop-filter: blur(6px);
+    max-width: 100vw;
+    width: 100vw;
+    margin-inline: auto;
+    border-bottom: solid 2px #ffffff83;
 }
 .section-header h3 {
     padding: 0;
@@ -392,6 +395,51 @@ select {
     width: 300px;
     min-height: 200px;
     
+}
+.resources-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background-color: #f125ee86;
+    border-radius: 1rem;
+    padding: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-inline: auto;
+    box-shadow: 0 8px 12px #0000008f;
+    max-width: 95vw;
+    width: 95vw;
+
+}
+.resource-item {
+    border: solid 1px #f5ccc7;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    backdrop-filter: blur(4px);
+    background: #f125ee80;
+    overflow: hidden;
+    box-shadow: 0 8px 12px #000000a8;
+}
+.resource-title {
+    border-right: solid 1px #fff;
+    padding-right: 5px;
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    word-break: break-all;
+}
+.resource-link {
+    width: calc(100% - 115px);
+    overflow: hidden;
 }
 
 .resource-header {
@@ -576,7 +624,7 @@ select {
 
 .note-container {
     background-color: #f6e78586;
-    box-shadow: 0 30px 25px #00000071, inset 0 0 50px #3399cc38;
+    box-shadow: 0 8px 12px #0000008f;
     min-height: 200px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -596,8 +644,7 @@ select {
 }
 
 .note {
-    background-color: #f6e785;
-    background-color: #f6e785cf;
+    background-color: #f6e78580;
     border-radius: 1rem;
     min-height: 200px;
     width: 300px;
@@ -640,8 +687,8 @@ select {
 
 
 .item-container {
-    background-color: #9fe48186;
-    box-shadow: 0 30px 25px #00000071, inset 0 0 50px #3399cc38;
+    background-color: #ff360086;
+    box-shadow: 0 8px 12px #0000008f;
     min-height: 200px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -662,7 +709,7 @@ select {
 
 .item {
     border-radius: 1rem;
-    background-color: #9fe481;
+    background-color: #ff360080;
     color: #222;
     width: 300px;
     min-width: 300px;
@@ -679,7 +726,7 @@ select {
 }
 .item-price {
     padding: 4px;
-    color: orangered;
+    color: yellowgreen;
     font-weight: bold;
     text-shadow: 0 0 1px #000;
 }
@@ -691,7 +738,7 @@ select {
 
 .project-container {
     background-color: #67cfdd86;
-    box-shadow: 0 30px 25px #00000071, inset 0 0 50px #3399cc38;
+    box-shadow: 0 8px 12px #0000008f;
     min-height: 200px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -712,7 +759,7 @@ select {
 
 .project {
     position: relative;
-    background-color: #67d0dd;
+    background-color: #67d0dd80;
     border-radius: 1rem;
     width: 300px;
     max-width: 90vw;
@@ -766,17 +813,10 @@ select {
 
 .item, .resource, .note, .project, .notebook {
     box-shadow: 0 10px 15px #0000008f;
+    backdrop-filter: blur(4px);
 }
 
-#togetherjs-walkthrough {
-    background-color: red;
-    max-height: 50vh;
-    top: 50%;
-    transform: translateY(-50%);
-}
-.togetherjs-mobile-browser .togetherjs .togetherjs-window {
-    height: 40%;
-}
+
 @media screen and (min-width: 800px) {
     body {
     }

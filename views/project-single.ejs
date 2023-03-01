@@ -74,20 +74,66 @@
         padding: 0.5rem;
         border-radius: 1rem;
     }
-    .edit-button {
-        background-color: #9fe481;
+
+    .task-actions {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .edit-button, .completed-button {
         text-align: center;
-        padding: 0.5rem;
+        padding: 1rem;
         border-radius: 1rem;
         margin-top: 1rem;
-
     }
-    .edit-button span {
+    .edit-button {
+        background-color: orangered;
+    }
+    .completed-button, .uncheck-task-button {
+        background-color: #9fe481;
+    }
+    .uncheck-task-button {
+        text-align: center;
+        padding: 1rem;
+        border-radius: 1rem;
+        margin-top: 1rem;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1.25rem;
+    }
+    .edit-button span, .completed-button span {
         pointer-events: none;
         color: #fff;
         font-weight: bold;
+        font-size: 1.25rem;
     }
-
+    .edit-form form {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 1rem;
+        align-items: flex-end;
+    }
+    .edit-form button {
+        width: 100%;
+    }
+    .delete-button {
+        background-color: orangered;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        border-radius: 1rem;
+        font-weight: bold;
+        font-size: 1.5rem;
+        width: 150px;
+        max-width: 40%;
+    }
+    .delete-button p {
+        color: #fff;
+    }
     .create-task h6 {
         font-size: 1.8rem;
         color: #3399cc;
@@ -123,18 +169,32 @@
     </div>
 
     <div class="drag-container">
+        <% if (project.tasks.length <= 0) { %>
+            <p style="text-align: center; padding-bottom: 1rem;">You haven't added any tasks yet.</p>
+        <% } else { %>
         <% project.tasks.forEach(function(task) { %>
             <% if (task.complete == true) { %>
-                <div class="draggable" data-complete="true" draggable="true">
+                <div class="draggable" data-complete="true" draggable="true" data-project-id="<%= project.id %>" data-task-id="<%= task.id %>">
             <% } else { %>
-                <div class="draggable" data-complete="false" draggable="true">
+                <div class="draggable" data-complete="false" draggable="true" data-project-id="<%= project.id %>" data-task-id="<%= task.id %>">
             <% } %>
 
                 <h6><%= task.title %></h6>
                 <p><%= task.description %></p>
                 <p class="note-created">Created: <%= task.lifecycle.created.toDateString() %></p>
-                <div class="edit-button">
-                    <span>Edit</span>
+                <div class="task-actions">
+                    <div class="edit-button">
+                        <span>Edit</span>
+                    </div>
+                    <div class="task-status">
+
+                        <div class="completed-button">
+                            <span>Compelete</span>
+                        </div>
+                        <div class="uncheck-task-button hidden">
+                            <p>Re-Open</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="edit-form hidden">
@@ -144,22 +204,30 @@
                         <button type="submit">Update</button>
                     </form>
 
-                    <form action="/company/projects/view/single/<%=project.id %>/tasks/<%= task.id %>/delete" method="post">
-                        <button class="delete-button" type="submit">Delete</button>
-                    </form>
+                    
+                    <div class="delete-button">
+                        <p>Delete</p>
+                    </div>
+
                 </div>
-
+                
             </div>
-
-        <% }) %>
+            
+            <% }) %>
+            
+            
+            
+            
+            
+        </div>
+        <% } %>
 
 
 
 
 
     </div>
-    </div>
-
+    
 </section>
 
 
@@ -186,17 +254,123 @@
         
         const 
             editBtn = draggable.querySelector('.edit-button'),
-            editForm = draggable.querySelector('.edit-form')
+            editForm = draggable.querySelector('.edit-form'),
+            completedBtn = draggable.querySelector('.completed-button'),
+            deleteBtn = draggable.querySelector('.delete-button'),
+            projectId = draggable.getAttribute('data-project-id'),
+            taskId = draggable.getAttribute('data-task-id'),
+            uncheckTaskBtn = draggable.querySelector('.uncheck-task-button')
         
+            const checkComplete = draggable.getAttribute('data-complete')
+            if (checkComplete === 'true') {
+                console.log('THIS TASK IS COMPLETE')
+                uncheckTaskBtn.classList.remove('hidden')
+                completedBtn.classList.add('hidden')
+            } else {
+                uncheckTaskBtn.classList.add('hidden')
+            }
         editBtn.addEventListener('click', e => {
+            const checkComplete = draggable.getAttribute('data-complete')
+
+            console.log('checkComplete')
+            console.log(checkComplete)
             editForm.classList.toggle('hidden')
             if (editForm.classList.contains('hidden')) {
+                console.log('editBtn if(editForm.classList.contains(hidden)) {YOU ARE HERE > }', draggable)
                 editBtn.querySelector('span').innerText = 'Edit'
-                e.target.style.backgroundColor = '#9fe481'
+                e.target.style.backgroundColor = 'orangered'
+                if (checkComplete === 'true') {
+                    console.log('checkComplete === true: ', checkComplete)
+                    uncheckTaskBtn.classList.remove('hidden')
+                    completedBtn.classList.add('hidden')
+                } else if (checkComplete === 'false') {
+                    completedBtn.classList.remove('hidden')
+                    uncheckTaskBtn.classList.add('hidden')
+                }
             } else {
                 editBtn.querySelector('span').innerText = 'Cancel'
                 e.target.style.backgroundColor = 'orangered'
+                completedBtn.classList.add('hidden')
+                uncheckTaskBtn.classList.add('hidden')
             }
+        })
+
+        completedBtn.addEventListener('click', e => {
+            draggable.setAttribute('data-complete', 'true')
+            uncheckTaskBtn.classList.remove('hidden')
+            completedBtn.classList.add('hidden')
+            const update = {
+                complete: true
+            }
+
+            const options = {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(update),
+            }
+
+            const url = 'http://localhost:5000/company/projects/view/single/' + projectId + '/tasks/status/' + taskId
+            console.log('url: ', url)
+            fetch(url, options)
+                .then(data => {
+                    if (!data.ok) {
+                        throw Error(data.status)
+                    }
+                    return data.json()
+                }).then(update => {
+                    console.log(update)
+                }).catch(e => {
+                    console.log(e);
+                })
+
+        })
+        uncheckTaskBtn.addEventListener('click', e => {
+            draggable.setAttribute('data-complete', 'false')
+            uncheckTaskBtn.classList.add('hidden')
+            completedBtn.classList.remove('hidden')
+            const update = {
+                complete: false
+            }
+
+            const options = {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(update),
+            }
+
+            const url = 'http://localhost:5000/company/projects/view/single/' + projectId + '/tasks/status/' + taskId
+            console.log('url: ', url)
+            fetch(url, options)
+                .then(data => {
+                    if (!data.ok) {
+                        throw Error(data.status)
+                    }
+                    return data.json()
+                }).then(update => {
+                    console.log(update)
+                }).catch(e => {
+                    console.log(e);
+                })
+        })
+
+
+
+        deleteBtn.addEventListener('click', e => {
+            draggable.classList.add('hidden')
+            const
+                url = '/company/projects/view/single/' + projectId + '/tasks/' + taskId + '/delete'
+
+            fetch(url, {
+                method: 'DELETE'
+            }).then(response => {
+                return response.json()
+            }).then(data =>
+                console.log(data)
+            );
         })
 
     })
